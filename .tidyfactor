@@ -1,0 +1,16 @@
+{
+  "name": "tidyfactor-skill-architect",
+  "version": "1.0.0",
+  "category": "governance",
+  "description": "TidyFactor Skill Architect - Governance Layer & Skill Methodology Engine",
+  "repository": "https://github.com/TidyFactor/Skill-Architect",
+  "npm": "@alwkala/tidyfactor-skill-architect",
+  "compatibility": [
+    "antigravity",
+    "claude-code",
+    "cursor",
+    "codex",
+    "windsurf"
+  ],
+  "license": "Apache-2.0"
+}

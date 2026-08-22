@@ -1,0 +1,49 @@
+{
+  "name": "@alwkala/tidyfactor-skill-architect",
+  "version": "1.0.0",
+  "description": "TidyFactor Skill Architect — Governance Layer & Methodology Engine for AI Coding Agent Skills",
+  "main": "bin/add-skill.js",
+  "bin": {
+    "tidyfactor-skill-architect": "bin/add-skill.js",
+    "add-architect-skill": "bin/add-skill.js"
+  },
+  "scripts": {
+    "validate": "python tools/validate_skill.py",
+    "build": "node tools/build-skill.js"
+  },
+  "keywords": [
+    "tidyfactor",
+    "skill-architect",
+    "governance",
+    "ai-agents",
+    "antigravity",
+    "claude-code",
+    "cursor",
+    "codex",
+    "skill-methodology"
+  ],
+  "author": "TidyFactor & Alwkala <hello@tidyfactor.com> (https://alwkala.com)",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TidyFactor/Skill-Architect.git"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "SKILL.md",
+    "references",
+    "memory",
+    "assets",
+    "tools",
+    "bin",
+    "brand.json",
+    ".tidyfactor",
+    "AGENTS.md",
+    "README.md",
+    "README.ar.md",
+    "LICENSE",
+    "CHANGELOG.md"
+  ]
+}
