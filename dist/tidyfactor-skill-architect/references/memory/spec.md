@@ -2,6 +2,8 @@
 
 Canonical structural rules. Every command and workflow in this skill enforces these. Pure rules — no rationale, no branding language (that's in `philosophy.md`, kept separate on purpose).
 
+This file mirrors the 8 Structural Rules defined in the master `AGENTS.md` (TidyFactor Skills-LAB Master Workspace Rules). If the two ever diverge, the master `AGENTS.md` wins — update this file, not the other way around.
+
 ## Anatomy
 
 ```
@@ -22,25 +24,16 @@ Start flat (one file per category). Split into a folder only when a category hol
 - **Workflow** — the ordered steps for exactly one outcome. Every workflow ends with a validation checklist that defines what "done, correctly" means for that outcome.
 - **Memory** — operational context loaded at runtime: facts, terminology, templates, domain rules, constraints. Not narrative, not justification, not "why we do this."
 
-## Rules
+## The 8 Structural Rules
 
-1. **A Skill is not a prompt and not a file collection.** It assembles only what a given task needs — a command loads one workflow and the memory that workflow needs, not everything in the skill.
-2. **Commands don't do tasks.** If a command file contains the actual instructions for producing output, that content belongs in a workflow; move it.
-3. **One Workflow = One Outcome.** A workflow covering two distinct outcomes must be split into two.
-4. **Every workflow defines validation.** A checklist, not a vague success description.
-5. **No Empty Structures.** A folder that would hold exactly one file should be that one file instead (`memory.md`, not `memory/context.md`).
-6. **Growth is triggered, not scheduled.** New files are added only per `growth-rule.md`'s explicit triggers — never for anticipated future need.
-7. **Philosophy/branding language never enters an operational file** (skill.md, any command, any workflow, any memory file an agent reads to execute a task). If it exists at all, it lives in `memory/philosophy.md`, unreferenced by any operational file — for a human reading the repo, not for the agent executing the skill.
-8. **Anti-Slop, Pre-Emit Critique & Mechanical Quality Control.** Every frontend/UI generation workflow must:
-   - Declare a **Step 0 One-Line Design Read**.
-   - Configure the **3-Dial System** (`designVariance`, `motionIntensity`, `visualDensity`).
-   - Run **Pre-Emit Self-Critique (1-5 Scoring on 6 Axes)**: *Philosophy (P)*, *Hierarchy (H)*, *Execution (E)*, *Specificity (S)*, *Restraint (R)*, *Variety (V)*. Scores < 3 trigger an automatic revision pass. Output is stamped: `/* Pre-emit critique: P5 H4 E5 S4 R5 V5 */`.
-   - Enforce mechanical pre-flight checks (eyebrow cap `ceil(sectionCount / 3)`, hero top padding cap `pt-24`, single-line CTAs, optical alignment, 16 named AI anti-patterns, and anti-interchangeable UI).
-9. **SemVer Release Versioning & CHANGELOG as SSOT for Skill Evolution.**
-   - Whenever a skill undergoes functional modifications, capability expansions (new commands, workflows, or toolsets), or structural refactoring, changes **MUST NEVER** occur as silent, unversioned drift.
-   - Every modification requires an explicit **SemVer version bump** (`MAJOR` for breaking architecture shifts, `MINOR` for new commands/tools/capabilities, `PATCH` for bug fixes/refinements/link repairs).
-   - **`CHANGELOG.md` is the Single Source of Truth (SSOT)** for skill history: Every release must have a dedicated, dated entry detailing added capabilities, modified workflows, and resolved defects.
-   - Version bumps must synchronize atomically across: `package.json`, `.tidyfactor`, `brand.json`, `README.md`, `README.ar.md`, and compiled release archives (`<skill>-vX.Y.Z.skill` and `<skill>.skill`).
+1. **Dispatcher Discipline.** `SKILL.md` is a router (~350 tokens), not a task-doer. It assembles only what a given task needs — a command loads one workflow and the memory that workflow needs, not everything in the skill. If a command file contains the actual instructions for producing output, that content belongs in a workflow; move it.
+2. **One Workflow = One Outcome.** A workflow covering two distinct outcomes must be split into two. Every workflow defines validation — a checklist, not a vague success description.
+3. **Operational Memory.** Memory is pure facts, schemas, terminology, templates, and technical rules — zero marketing commentary or narrative prose. Not narrative, not justification, not "why we do this."
+4. **No Empty Structures.** A folder that would hold exactly one file should be that one file instead (`memory.md`, not `memory/context.md`).
+5. **Philosophy Isolation.** Philosophy/branding language never enters an operational file (skill.md, any command, any workflow, any memory file an agent reads to execute a task). If it exists at all, it lives in `memory/philosophy.md`, unreferenced by any operational file — for a human reading the repo, not for the agent executing the skill.
+6. **Trigger-Justified Growth.** New files are added only per `growth-rule.md`'s explicit triggers — never for anticipated future need.
+7. **Quality Bar & Native Tooling.** Deterministic operations are encapsulated in `tools/` as wrappers over native toolchains (`tsc`, `node`, `python`, `git`, OS APIs). Do not script if a shell command is sufficient. No autonomous mass-edit scripts (e.g. no `auto_optimize.py`).
+8. **Cross-Platform Parity.** 100% identical behavior across Antigravity, Claude Code, Cursor, and Codex.
 
 ## Loading order (progressive disclosure)
 

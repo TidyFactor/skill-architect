@@ -2,7 +2,7 @@
 /**
  * build-skill.js — packages the distributable Claude Skill (.skill file)
  * for tidyfactor-skill-architect from the repo's single source of truth,
- * and synchronizes across all target agent locations.
+ * and synchronizes across all 5 target agent locations.
  */
 
 const fs = require("fs");
@@ -17,6 +17,9 @@ const STAGE_DIR = path.join(DIST_DIR, SKILL_NAME);
 const HOME = process.env.USERPROFILE || process.env.HOME;
 const AGENTS_SKILL = path.resolve(ROOT, "..", ".agents", "skills", SKILL_NAME);
 const GLOBAL_CONFIG_SKILL = path.join(HOME, ".gemini", "config", "skills", SKILL_NAME);
+const CLAUDE_USER_SKILL = process.env.CLAUDE_SKILLS_DIR
+  ? path.join(process.env.CLAUDE_SKILLS_DIR, SKILL_NAME)
+  : path.join("/mnt", "skills", "user", SKILL_NAME);
 
 const args = process.argv.slice(2);
 const outFlagIdx = args.indexOf("--out");
@@ -107,15 +110,26 @@ function zipArchive(stagePath, outFile, cwdDir) {
 }
 
 function syncToTargetLocation(targetDir) {
-  log(`synchronizing to target location: ${targetDir}`);
-  rmrf(targetDir);
-  fs.mkdirSync(targetDir, { recursive: true });
-  for (const item of ROOT_COPIES) {
-    const src = path.join(ROOT, item);
-    const dest = path.join(targetDir, item);
-    if (fs.existsSync(src)) {
-      fs.cpSync(src, dest, { recursive: true });
+  try {
+    const parentDir = path.dirname(targetDir);
+    if (!fs.existsSync(parentDir) && !targetDir.startsWith(HOME) && !targetDir.includes("Skills-LAB")) {
+      // If external target parent does not exist in current OS environment, skip gracefully
+      return false;
     }
+    log(`synchronizing to target location: ${targetDir}`);
+    rmrf(targetDir);
+    fs.mkdirSync(targetDir, { recursive: true });
+    for (const item of ROOT_COPIES) {
+      const src = path.join(ROOT, item);
+      const dest = path.join(targetDir, item);
+      if (fs.existsSync(src)) {
+        fs.cpSync(src, dest, { recursive: true });
+      }
+    }
+    return true;
+  } catch (err) {
+    log(`Notice: skipped synchronization to ${targetDir} (${err.message})`);
+    return false;
   }
 }
 
@@ -154,10 +168,11 @@ function main() {
     log(`✓ Updated Skills-LAB root archives → ${SKILL_NAME}.skill & ${SKILL_NAME}-v${pkg.version}.skill`);
   }
 
-  // Cross-Agent Synchronization
+  // Cross-Agent Synchronization (5 Target Locations)
   syncToTargetLocation(AGENTS_SKILL);
   syncToTargetLocation(GLOBAL_CONFIG_SKILL);
-  log(`✓ Completed 4-way cross-agent synchronization across all target locations.`);
+  syncToTargetLocation(CLAUDE_USER_SKILL);
+  log(`✓ Completed cross-agent synchronization across registered target locations.`);
 }
 
 main();

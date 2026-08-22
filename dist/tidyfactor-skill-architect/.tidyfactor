@@ -1,6 +1,6 @@
 {
   "name": "tidyfactor-skill-architect",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "category": "governance",
   "description": "TidyFactor Skill Architect - Governance Layer & Skill Methodology Engine",
   "repository": "https://github.com/TidyFactor/Skill-Architect",

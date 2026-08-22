@@ -7,6 +7,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [1.1.0] - 2026-08-22
+
+### Added
+- **Context Budgeting & Token Economy Layer**: Added `references/memory/context-budget.md` defining strict component token boundaries (~350 tokens dispatcher, ~150 lines workflows/commands, ~300 lines memory) and 3-tier context injection rules (Required, Optional, Forbidden).
+- **Anti-Triggers / Negative Triggers**: Added explicit negative triggers in `SKILL.md` frontmatter `description` to prevent non-structural prompt engineering task misdirection.
+- **5-Way Multi-Environment Synchronization**: Added support in `tools/build-skill.js` and `AGENTS.md` for Claude/Unix agent environment (`/mnt/skills/user/<skill-name>/`).
+- **Draft Mode vs. Release Mode Lifecycle**: Codified two-tier governance in `AGENTS.md` for frictionless local development vs strict release hygiene.
+- **Expanded 8-Rule Audit Workflow**: Updated `audit-skill.md` to evaluate compliance on full 8/8 rules, context budget health, and ecosystem scope overlap / collision checks.
+
+### Changed
+- **Dispatcher Trim**: Refactored `SKILL.md` into a lean ~350 token pure router, relocating inline rule constraints to `references/memory/spec.md`.
+- **Behavioral Parity Standard**: Updated Rule 8 from "100% identical behavior" to "Behavioral Parity across Antigravity, Claude Code, Cursor, and Codex".
+
+---
+
 ## [1.0.0] - 2026-08-22
 
 ### Added

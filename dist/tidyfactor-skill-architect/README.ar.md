@@ -1,4 +1,4 @@
-# مهندس مهارات تايدي فاكتور (TidyFactor Skill Architect v1.0.0)
+# مهندس مهارات تايدي فاكتور (TidyFactor Skill Architect v1.1.0)
 
 > **طبقة الحوكمة ومحرك منهجية المهارات لوكلاء البرمجة بالذكاء الاصطناعي**  
 > يطبق القواعد الهيكلية الثمانية لمهارات تايدي فاكتور عبر بيئات Antigravity وClaude Code وCursor وCodex وWindsurf.
