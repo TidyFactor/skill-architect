@@ -139,39 +139,49 @@ def main():
             else:
                 warnings.append(f"Memory file {mf.name} missing <!-- last-verified: YYYY-MM-DD --> marker")
 
-    # 8. Frontmatter description length (Rule 9: max 1024 chars)
-    print("\n[8] Checking SKILL.md frontmatter description length...")
+    # 8. SKILL.md Frontmatter YAML Syntax & Constraints (Rule 9)
+    print("\n[8] Checking SKILL.md frontmatter YAML syntax & constraints (Rule 9)...")
     if skill_md.exists():
         content = skill_md.read_text(encoding="utf-8")
-        in_fm = False
-        desc_lines = []
-        collecting = False
-        for line in content.split("\n"):
-            stripped = line.rstrip("\r")
-            if stripped.strip() == "---" and not in_fm:
-                in_fm = True
-                continue
-            if stripped.strip() == "---" and in_fm:
-                break
-            if in_fm:
-                if stripped.startswith("description:"):
-                    desc_lines.append(stripped.split("description:", 1)[1].strip().strip('"').strip("'"))
-                    collecting = True
-                elif collecting and stripped.startswith("  "):
-                    desc_lines.append(stripped.strip())
-                else:
-                    collecting = False
-        desc_text = " ".join(desc_lines).strip()
-        desc_len = len(desc_text)
-        if desc_len > 1024:
-            errors.append(f"SKILL.md description is {desc_len} chars (max 1024)")
-        elif desc_len > 920:
-            warnings.append(f"SKILL.md description is {desc_len}/1024 chars (near limit)")
-            print(f"  [WARN] Description: {desc_len}/1024 chars (near limit)")
-        elif desc_len > 0:
-            print(f"  [OK] Description: {desc_len}/1024 chars.")
+        if not content.startswith("---"):
+            errors.append("SKILL.md is missing opening YAML frontmatter '---'.")
         else:
-            errors.append("SKILL.md has no description in frontmatter")
+            parts = content.split("---", 2)
+            if len(parts) < 3:
+                errors.append("SKILL.md has unclosed YAML frontmatter '---'.")
+            else:
+                fm_raw = parts[1]
+                try:
+                    import yaml
+                    fm_data = yaml.safe_load(fm_raw)
+                    if not isinstance(fm_data, dict):
+                        errors.append("SKILL.md frontmatter is not a valid YAML mapping.")
+                    else:
+                        name_val = fm_data.get("name")
+                        desc_val = fm_data.get("description")
+
+                        # Validate name
+                        if not name_val or not isinstance(name_val, str):
+                            errors.append("SKILL.md frontmatter missing or invalid 'name' field.")
+                        elif name_val != root.name:
+                            warnings.append(f"SKILL.md name '{name_val}' does not match root folder '{root.name}'.")
+                        else:
+                            print(f"  [OK] Name: '{name_val}' (valid).")
+
+                        # Validate description
+                        if not desc_val or not isinstance(desc_val, str):
+                            errors.append("SKILL.md frontmatter missing or empty 'description' field.")
+                        else:
+                            desc_len = len(desc_val.strip())
+                            if desc_len > 1024:
+                                errors.append(f"SKILL.md description is {desc_len} chars (max 1024, Claude limit).")
+                            elif desc_len > 920:
+                                warnings.append(f"SKILL.md description is {desc_len}/1024 chars (near limit).")
+                                print(f"  [WARN] Description: {desc_len}/1024 chars (near limit).")
+                            else:
+                                print(f"  [OK] Description: {desc_len}/1024 chars (YAML syntax valid).")
+                except Exception as e:
+                    errors.append(f"SKILL.md YAML frontmatter parsing failed: {e}")
 
     # 9. Tooling Scope Declaration (Rule 10)
     print("\n[9] Checking Tooling Scope declaration (Rule 10)...")

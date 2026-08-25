@@ -1,6 +1,6 @@
 ---
 name: tidyfactor-skill-architect
-description: Master governance layer for AI Coding Agent Skills. Use when building a new skill, auditing for structural compliance, generating test scenarios, evaluating file growth, or when the user asks for a "TidyFactor skill" or "مهارة بمنهجية TidyFactor". Anti-triggers: Do NOT use for general prompt writing or non-skill content tasks.
+description: "Master governance layer for AI Coding Agent Skills. Use when building a new skill, auditing for structural compliance, generating test scenarios, evaluating file growth, or when the user asks for a 'TidyFactor skill' or 'مهارة بمنهجية TidyFactor'. Anti-triggers: Do NOT use for general prompt writing or non-skill content tasks."
 ---
 
 # TidyFactor Skill Architect

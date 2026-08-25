@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [2.0.2] - 2026-08-25
+
+### Fixed
+- **YAML Frontmatter Parsing Defect**: Fixed invalid unquoted `description` in `SKILL.md` that contained colons (`Anti-triggers:`) and quotes, which caused `yaml.scanner.ScannerError: mapping values are not allowed here` and prevented AI Agent IDEs (Antigravity / Gemini) from loading the skill in slash (`/`) command autocomplete menus.
+
+### Added
+- **Strict YAML Frontmatter Parser Validation**: Integrated `yaml.safe_load()` verification into `tools/validate_skill.py` (Check `[8]`) to validate frontmatter syntax, name presence, and description constraints before packaging/release.
+
+### Changed
+- **Rule 9 Frontmatter Invariant Specification**: Updated Rule 9 in `references/memory/spec.md` and workspace `AGENTS.md` to mandate enclosing `description: "..."` in double quotes when containing colons, quotes, or special characters.
+
+---
+
 ## [2.0.1] - 2026-08-25
 
 ### Added
