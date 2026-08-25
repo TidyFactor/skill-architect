@@ -1,5 +1,7 @@
 # Growth Rule (generic — applies to any skill this layer creates or audits)
 
+<!-- last-verified: 2026-08-25 -->
+
 A skill starts flat: `SKILL.md` + one commands file + one workflows file + one memory file. Add a new file, or split an existing one into a folder, only when ONE of these is true right now — not in anticipation:
 
 1. **Size trigger.** A file exceeds ~150-300 lines (300 for memory/reference docs, 150 for command/workflow files — commands and workflows should stay scannable). Split along the axis actually causing the growth (a new market, a new engagement type, a new platform variant) — not arbitrarily in half.

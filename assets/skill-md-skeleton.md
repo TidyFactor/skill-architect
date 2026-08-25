@@ -1,6 +1,6 @@
 ---
 name: <skill-name>
-description: <what it does AND when to trigger it — pushy per skill-creator's guidance, one paragraph, no philosophy language>
+description: <what it does AND when to trigger it — "what + when" pattern, one paragraph, max 1024 chars, no philosophy language>
 ---
 
 # <Skill Title>
@@ -22,6 +22,14 @@ A command dispatcher. [One line: what this skill's job is, in plain terms.]
      Otherwise delete this section — an empty constraints list is an empty structure. -->
 
 1. <constraint>
+
+## Tooling Scope (Rule 10)
+
+<!-- Required only if this skill has a tools/ directory. Delete this section otherwise. -->
+
+- **Languages**: <node | python | shell>
+- **Mutations**: <read-only | file-mutations | network>
+- **Network**: <none | required for X>
 
 ## Validation
 

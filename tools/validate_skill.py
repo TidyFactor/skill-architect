@@ -23,6 +23,7 @@ if sys.platform == "win32":
 def main():
     root = Path(__file__).resolve().parent.parent
     errors = []
+    warnings = []
     
     print("=" * 60)
     print("  RUNNING TIDYFACTOR SKILL ARCHITECT RELEASE VALIDATION")
@@ -101,20 +102,92 @@ def main():
                 continue
             text = file.read_text(encoding="utf-8", errors="ignore")
             if re.search(r'[A-Za-z]:\\[Users|wamp64|Dev\-Studio]', text, re.IGNORECASE):
-                if file.name not in ["release_suite.py", "audit_all_skills.py"]:
+                if file.name not in ["release_suite.py", "audit_all_skills.py", "validate_skill.py"]:
                     errors.append(f"Machine-specific absolute path found in: {file.relative_to(root)}")
+
+    # 6. SKILL.md token count estimation (Rule 1: ~350 tokens target, 500 max)
+    print("\n[6] Checking SKILL.md token budget...")
+    if skill_md.exists():
+        skill_text = skill_md.read_text(encoding="utf-8")
+        words = len(skill_text.split())
+        estimated_tokens = int(words * 1.25)
+        print(f"  SKILL.md size: {len(skill_text)} chars / {words} words ≈ {estimated_tokens} tokens")
+        if estimated_tokens > 500:
+            warnings.append(f"SKILL.md estimated at {estimated_tokens} tokens (target: ~350, max: 500)")
+        else:
+            print(f"  [OK] Within token budget ({estimated_tokens} tokens, target ~350, max 500).")
+
+    # 7. Memory freshness check (Rule 11: last-verified within 180 days)
+    print("\n[7] Checking memory freshness markers (Rule 11)...")
+    mem_dir = root / "references" / "memory"
+    if mem_dir.exists():
+        from datetime import datetime, timedelta
+        today = datetime.now()
+        max_age = timedelta(days=180)
+        for mf in mem_dir.glob("*.md"):
+            if mf.name == "philosophy.md":
+                continue  # Philosophy is unreferenced, skip
+            text = mf.read_text(encoding="utf-8")
+            match = re.search(r'<!--\s*last-verified:\s*(\d{4}-\d{2}-\d{2})\s*-->', text)
+            if match:
+                verified_date = datetime.strptime(match.group(1), "%Y-%m-%d")
+                age = today - verified_date
+                if age > max_age:
+                    warnings.append(f"Memory file {mf.name} last verified {match.group(1)} ({age.days} days ago, max 180)")
+                else:
+                    print(f"  [OK] {mf.name}: verified {match.group(1)} ({age.days} days ago)")
+            else:
+                warnings.append(f"Memory file {mf.name} missing <!-- last-verified: YYYY-MM-DD --> marker")
+
+    # 8. Frontmatter description length (Rule 9: max 1024 chars)
+    print("\n[8] Checking SKILL.md frontmatter description length...")
+    if skill_md.exists():
+        content = skill_md.read_text(encoding="utf-8")
+        in_fm = False
+        desc_lines = []
+        collecting = False
+        for line in content.split("\n"):
+            stripped = line.rstrip("\r")
+            if stripped.strip() == "---" and not in_fm:
+                in_fm = True
+                continue
+            if stripped.strip() == "---" and in_fm:
+                break
+            if in_fm:
+                if stripped.startswith("description:"):
+                    desc_lines.append(stripped.split("description:", 1)[1].strip().strip('"').strip("'"))
+                    collecting = True
+                elif collecting and stripped.startswith("  "):
+                    desc_lines.append(stripped.strip())
+                else:
+                    collecting = False
+        desc_text = " ".join(desc_lines).strip()
+        desc_len = len(desc_text)
+        if desc_len > 1024:
+            errors.append(f"SKILL.md description is {desc_len} chars (max 1024)")
+        elif desc_len > 920:
+            warnings.append(f"SKILL.md description is {desc_len}/1024 chars (near limit)")
+            print(f"  [WARN] Description: {desc_len}/1024 chars (near limit)")
+        elif desc_len > 0:
+            print(f"  [OK] Description: {desc_len}/1024 chars.")
+        else:
+            errors.append("SKILL.md has no description in frontmatter")
 
     print("\n" + "=" * 60)
     if errors:
         print(f"[FAIL] {len(errors)} validation error(s) found:")
         for err in errors:
-            print(f"  - {err}")
-        print("=" * 60)
-        sys.exit(1)
-    else:
+            print(f"  ❌ {err}")
+    if warnings:
+        print(f"[WARN] {len(warnings)} warning(s):")
+        for warn in warnings:
+            print(f"  ⚠️  {warn}")
+    if not errors and not warnings:
         print("[SUCCESS] ALL SKILL INTEGRITY CHECKS PASSED!")
-        print("=" * 60)
-        sys.exit(0)
+    elif not errors:
+        print("[PASS WITH WARNINGS] No errors, but warnings should be addressed.")
+    print("=" * 60)
+    sys.exit(1 if errors else 0)
 
 if __name__ == "__main__":
     main()

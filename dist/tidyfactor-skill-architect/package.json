@@ -1,6 +1,6 @@
 {
   "name": "@alwkala/tidyfactor-skill-architect",
-  "version": "1.1.1",
+  "version": "2.0.0",
   "description": "TidyFactor Skill Architect — Governance Layer & Methodology Engine for AI Coding Agent Skills",
   "main": "SKILL.md",
   "bin": {
@@ -40,6 +40,7 @@
     "assets",
     "tools",
     "bin",
+    "tests",
     "brand.json",
     ".tidyfactor",
     "AGENTS.md",

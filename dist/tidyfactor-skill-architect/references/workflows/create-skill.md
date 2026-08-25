@@ -33,12 +33,18 @@ One outcome: a new skill folder that is compliant with `memory/spec.md`, `memory
 6. **Write Memory File(s)**:
    - Pure facts, schemas, constraints, and operational tables.
    - Isolate any human-facing philosophy into unreferenced `memory/philosophy.md`.
+   - Add `<!-- last-verified: YYYY-MM-DD -->` comment at the top of every memory file, set to today's date.
 
 7. **Add Deterministic Tooling & Metadata**:
    - Add `tools/validate_skill.py` and `tools/build-skill.js`.
    - Add `package.json`, `.tidyfactor`, `brand.json`, `CHANGELOG.md`, `README.md`, `README.ar.md`.
+   - If the skill has `tools/`, add a "Tooling Scope" section to `SKILL.md` (Rule 10).
 
-8. **Validate & Package**:
+8. **Generate Test Scenarios**:
+   - Create `tests/scenarios.md` with 3+ test prompts: 1 happy-path per command, 1 edge-case, 1 negative test.
+   - Follow the format defined in `references/workflows/test-skill.md`.
+
+9. **Validate & Package**:
    - Run `python tools/validate_skill.py`.
    - Run `node tools/build-skill.js`.
 
@@ -48,7 +54,11 @@ One outcome: a new skill folder that is compliant with `memory/spec.md`, `memory
 
 - [ ] `SKILL.md` token count within budget (~350 tokens) and contains explicit anti-triggers
 - [ ] `SKILL.md` contains no domain knowledge or embedded rules text, only routing
+- [ ] `SKILL.md` frontmatter `description` follows "what + when" pattern and is ≤ 1024 chars
 - [ ] Every workflow ends in a concrete checklist
 - [ ] No single-file subfolders (Rule 4: No empty structures)
 - [ ] Operational memory contains zero marketing narrative or unisolated philosophy
+- [ ] All memory files have `<!-- last-verified: YYYY-MM-DD -->` comments
+- [ ] If `tools/` exists, `SKILL.md` includes Tooling Scope section (Rule 10)
+- [ ] Test scenarios file exists with ≥ 3 scenarios
 - [ ] Automated validation (`validate_skill.py`) passes without errors

@@ -1,5 +1,7 @@
 # Context Budget & Token Economy
 
+<!-- last-verified: 2026-08-25 -->
+
 Pure operational rules for managing agent context budgets and token economy across TidyFactor skills.
 
 ---

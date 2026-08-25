@@ -7,6 +7,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [2.0.0] - 2026-08-25
+
+### Added
+- **12 Structural Rules Evolution**: Expanded canonical spec from 9 to 12 rules (`references/memory/spec.md`):
+  - **Rule 10 (Tool Permission Declaration)**: Explicit declaration of tool languages, mutation capabilities, and network scope in `SKILL.md`.
+  - **Rule 11 (Memory Freshness Verification)**: Required `<!-- last-verified: YYYY-MM-DD -->` markers with 180-day staleness audit gate.
+  - **Rule 12 (Skill vs MCP Boundary)**: Clear architectural boundary separating static prompt/decision workflows from external live MCP servers.
+- **New `test` Command & Workflow**: Added `references/commands/test.md` and `references/workflows/test-skill.md` to generate 3+ realistic test scenarios (`tests/scenarios.md`).
+- **Enhanced Validation Engine**: Updated `tools/validate_skill.py` with numeric token estimation (~350 token budget), memory freshness checks, and frontmatter length limits.
+- **Cascade Update Protocol**: Codified atomic synchronization rules across all markdown references when structural rules change.
+
+### Changed
+- **Rule 9 Optimization**: Refined frontmatter description standard to "what + when" pattern to minimize discovery-layer token footprint.
+- **Audit Workflow**: Upgraded `audit-skill.md` scoring to 12-rule rubric (X/12).
+- **Template Update**: Updated `assets/skill-md-skeleton.md` with Tooling Scope section.
+
+---
+
 ## [1.1.1] - 2026-08-25
 
 ### Fixed

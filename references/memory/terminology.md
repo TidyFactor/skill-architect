@@ -1,5 +1,7 @@
 # Terminology
 
+<!-- last-verified: 2026-08-25 -->
+
 Used consistently across every skill this layer produces, so a person moving between tidyfactor-html, tidyfactor-php, tidyfactor-design, etc. finds the same vocabulary each time.
 
 - **Skill** — a runtime capability package (SKILL.md + references + optional assets/scripts), not a single prompt.
