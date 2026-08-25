@@ -1,4 +1,4 @@
-# TidyFactor Skill Architect v2.0.0
+# TidyFactor Skill Architect v2.0.1
 
 > **Governance Layer & Skill Methodology Engine for AI Coding Agents**  
 > Enforces the 12 Structural Rules of TidyFactor Skills across Google Antigravity, Claude Code, Cursor, Codex, and Windsurf.
