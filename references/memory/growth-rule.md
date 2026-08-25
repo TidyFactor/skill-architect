@@ -10,6 +10,12 @@ A skill starts flat: `SKILL.md` + one commands file + one workflows file + one m
 
 3. **Variant trigger.** The skill's output needs a second distinct form (a short-form vs. full-form template, a different target platform). Add one new asset/template file, and add one line to skill.md's dispatch table (or the relevant command) saying which request maps to which variant.
 
+4. **Decision Complexity trigger (CDL Layer).** Adopt the Contextual Decision Layer (`brief` command + `decision-points.md` + `.tidyfactor/<skill>-brief.md` cache) ONLY when a skill meets all three criteria:
+   - (a) The skill has $\ge 3$ interdependent architectural choices (e.g., framework, database engine, UI styling tier) where wrong assumptions cause total deliverable failure.
+   - (b) Downstream commands must inherit cached baseline decisions across repeated user turns without re-interviewing.
+   - (c) The skill implements pre-emit self-critique (Axis 7: Decision Alignment).
+   *Do NOT adopt CDL speculatively for linear, single-purpose, or standalone utility skills.*
+
 ## Explicitly not triggers
 
 - "We might need this later" — not a trigger.

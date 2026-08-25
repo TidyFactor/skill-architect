@@ -173,6 +173,59 @@ def main():
         else:
             errors.append("SKILL.md has no description in frontmatter")
 
+    # 9. Tooling Scope Declaration (Rule 10)
+    print("\n[9] Checking Tooling Scope declaration (Rule 10)...")
+    tools_dir = root / "tools"
+    has_executable_tools = tools_dir.exists() and any(
+        f.suffix in [".py", ".js", ".sh", ".ts"] for f in tools_dir.iterdir() if f.is_file()
+    )
+    if has_executable_tools and skill_md.exists():
+        skill_text = skill_md.read_text(encoding="utf-8")
+        if "tooling scope" not in skill_text.lower():
+            warnings.append("Skill has tools/ directory but SKILL.md is missing '## Tooling Scope' section (Rule 10)")
+            print("  [WARN] Missing '## Tooling Scope' section in SKILL.md.")
+        else:
+            has_lang = any(k in skill_text.lower() for k in ["language", "languages", "python", "node", "shell"])
+            has_mut = any(k in skill_text.lower() for k in ["mutation", "mutations", "read-only", "file"])
+            if has_lang and has_mut:
+                print("  [OK] Tooling Scope declared with languages and mutation scope.")
+            else:
+                warnings.append("Tooling Scope section in SKILL.md should specify Languages and Mutations.")
+                print("  [WARN] Tooling Scope section incomplete.")
+    else:
+        print("  [OK] No executable tools directory found (N/A).")
+
+    # 10. Test Scenarios Verification
+    print("\n[10] Checking Test Scenarios (tests/scenarios.md)...")
+    tests_file = root / "tests" / "scenarios.md"
+    if tests_file.exists():
+        test_content = tests_file.read_text(encoding="utf-8")
+        test_matches = re.findall(r'(?m)^##\s+Test|\bTest\s+\d+:', test_content)
+        test_count = len(test_matches)
+        if test_count >= 3:
+            print(f"  [OK] tests/scenarios.md found with {test_count} test scenarios (min 3).")
+        else:
+            warnings.append(f"tests/scenarios.md has only {test_count} scenario(s) (recommended: >= 3)")
+            print(f"  [WARN] tests/scenarios.md has only {test_count} scenario(s).")
+    else:
+        warnings.append("Missing tests/scenarios.md (recommended: generate via 'test' command)")
+        print("  [WARN] tests/scenarios.md not found.")
+
+    # 11. Skill vs MCP Boundary (Rule 12)
+    print("\n[11] Checking MCP boundary documentation (Rule 12)...")
+    mcp_refs = False
+    if skill_md.exists():
+        st = skill_md.read_text(encoding="utf-8").lower()
+        if "mcp" in st or (root / "mcp.json").exists() or (root / ".mcp").exists():
+            mcp_refs = True
+            if "boundary" in st or "mcp server" in st or "mcp" in st:
+                print("  [OK] Skill vs MCP boundary documented.")
+            else:
+                warnings.append("Skill references MCP but does not explicitly document the Skill vs MCP boundary (Rule 12).")
+                print("  [WARN] Undocumented MCP boundary.")
+    if not mcp_refs:
+        print("  [OK] No external MCP dependencies detected (N/A).")
+
     print("\n" + "=" * 60)
     if errors:
         print(f"[FAIL] {len(errors)} validation error(s) found:")
