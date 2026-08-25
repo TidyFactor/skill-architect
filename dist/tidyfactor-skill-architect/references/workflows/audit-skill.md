@@ -36,7 +36,7 @@ One outcome: a compliance report against `memory/spec.md`, with specific fixes â
 2. ...
 ```
 
-## Validation
+## Validation checklist
 
 - [ ] Every fail has a named file and a concrete fix, not a generic note
 - [ ] Report doesn't recommend adding new files unless a growth-rule.md trigger is explicitly cited

@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [1.1.1] - 2026-08-25
+
+### Fixed
+- **CLI Executable & NPX Packaging**: Added standard `"add-skill": "bin/add-skill.js"` mapping in `package.json` to ensure unified `npx @alwkala/tidyfactor-skill-architect add-skill` execution.
+- **Workflow Compliance**: Standardized header in `references/workflows/audit-skill.md` to `## Validation checklist`.
+
+---
+
 ## [1.1.0] - 2026-08-22
 
 ### Added
@@ -25,7 +33,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.0.0] - 2026-08-22
 
 ### Added
-- **Official SSOT Skill Scaffolding**: Promoted `tidyfactor-skill-architect` into a first-class SSOT skill inside `c:\wamp64\www\TidyFactor\Skills\Skills-LAB\tidyfactor-skill-architect\`.
+- **Official SSOT Skill Scaffolding**: Promoted `tidyfactor-skill-architect` into a first-class SSOT skill inside `tidyfactor-skill-architect/`.
 - **Command Router**:
   - `init`: Scaffolds a new skill following the 8 structural rules & dispatcher pattern.
   - `audit`: Audits any existing skill against structural compliance checklist.
