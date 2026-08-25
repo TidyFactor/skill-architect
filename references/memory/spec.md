@@ -35,6 +35,15 @@ Start flat (one file per category). Split into a folder only when a category hol
 7. **Quality Bar & Native Tooling.** Deterministic operations are encapsulated in `tools/` as wrappers over native toolchains (`tsc`, `node`, `python`, `git`, OS APIs). Do not script if a shell command is sufficient. No autonomous mass-edit scripts (e.g. no `auto_optimize.py`).
 8. **Cross-Platform Parity.** 100% identical behavior across Antigravity, Claude Code, Cursor, and Codex.
 
+## The Contextual Decision Layer (CDL) Pattern
+
+For complex skills where execution depends on high-impact architectural choices (e.g. `tidyfactor-styler`, `tidyfactor-next`):
+1. **Thin Arbitration Protocol (`memory/decision-points.md`)**: Define triggers, boolean skip conditions, and pointers to existing SSOT memory catalogs. Never hardcode duplicate options.
+2. **Pre-flight Brief & Cache (`brief` command / `.tidyfactor/<skill>-brief.md`)**: Interview once per project, cache baseline decisions, and run downstream commands silently without repetitive questions.
+3. **Single-Round Batching & Priority**: Batch unresolved questions into 1 round (max 3 questions). Overflow is resolved to safe conservative defaults.
+4. **Direct Invocation vs. Redesign Invariants**: Direct command calls never skip; redesign workflows silently preserve existing baselines unless overhaul is explicitly requested.
+5. **Decision Alignment Axis**: Add Axis 7 (`D` - Decision Alignment) to the Pre-Emit Self-Critique to verify that generated output respects the confirmed brief.
+
 ## Loading order (progressive disclosure)
 
 1. name + description (always in context once the skill is installed)
