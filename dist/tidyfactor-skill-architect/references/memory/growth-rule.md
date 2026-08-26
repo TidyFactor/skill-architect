@@ -1,6 +1,6 @@
 # Growth Rule (generic — applies to any skill this layer creates or audits)
 
-<!-- last-verified: 2026-08-25 -->
+<!-- last-verified: 2026-08-27 -->
 
 A skill starts flat: `SKILL.md` + one commands file + one workflows file + one memory file. Add a new file, or split an existing one into a folder, only when ONE of these is true right now — not in anticipation:
 
@@ -16,6 +16,11 @@ A skill starts flat: `SKILL.md` + one commands file + one workflows file + one m
    - (c) The skill implements pre-emit self-critique (Axis 7: Decision Alignment).
    *Do NOT adopt CDL speculatively for linear, single-purpose, or standalone utility skills.*
 
+5. **Rule Catalog Complexity Trigger (Prioritized Impact Taxonomy).** When a skill maintains $\ge 15$ operational guidelines, lints, or performance/security best practices:
+   - Group rules strictly by prioritized impact tiers (`CRITICAL`, `HIGH`, `MEDIUM`, `LOW`) rather than flat alphabetical lists.
+   - Standardize rule anatomy following `assets/rule-template.md` (Rule ID, Impact Rating, Problem Rationale, Incorrect Code, Correct Code, Edge Cases).
+   - Encapsulate rules within a dedicated memory catalog (e.g. `memory/<domain>-rules.md`) and load it selectively into relevant commands/workflows.
+
 ## Explicitly not triggers
 
 - "We might need this later" — not a trigger.
@@ -24,4 +29,4 @@ A skill starts flat: `SKILL.md` + one commands file + one workflows file + one m
 
 ## When auditing
 
-If an existing skill has multiple files in a category, each one should trace back to one of the three triggers above. A file that doesn't map to any trigger is a spec violation — flag it in the audit report as a candidate for merging back in.
+If an existing skill has multiple files in a category, each one should trace back to one of the triggers above. A file that doesn't map to any trigger is a spec violation — flag it in the audit report as a candidate for merging back in.

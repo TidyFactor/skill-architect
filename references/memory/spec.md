@@ -50,6 +50,13 @@ For complex skills where execution depends on high-impact architectural choices 
 4. **Direct Invocation vs. Redesign Invariants**: Direct command calls never skip; redesign workflows silently preserve existing baselines unless overhaul is explicitly requested.
 5. **Decision Alignment Axis**: Add Axis 7 (`D` - Decision Alignment) to the Pre-Emit Self-Critique to verify that generated output respects the confirmed brief.
 
+## The Prioritized Rule Catalog Pattern
+
+For skills containing complex guideline libraries, lints, or performance/security standards ($\ge 15$ rules, e.g. `tidyfactor-next`, `tidyfactor-styler`, `cpanel-server-admin`):
+1. **Prioritized Impact Ranking**: Categorize rules strictly by quantifiable impact (`CRITICAL` $\to$ `HIGH` $\to$ `MEDIUM` $\to$ `LOW`) with standard domain prefixes (e.g., `async-`, `bundle-`, `server-`, `sec-`).
+2. **Standardized Rule Anatomy (`assets/rule-template.md`)**: Every rule must contain: (a) Rule ID, (b) Impact Tier, (c) Problem Rationale, (d) Incorrect Code Snippet (❌), (e) Correct Drop-in Code Snippet (✅), (f) Edge Cases & Constraints.
+3. **Separation from General Prose**: Keep the rule catalog strictly in operational memory (`memory/<domain>-rules.md`), loaded only by commands that generate or audit corresponding code/configurations.
+
 ## Loading order (progressive disclosure)
 
 1. name + description (always in context once the skill is installed)

@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [2.1.0] - 2026-08-27
+
+### Added
+- **Prioritized Rule Catalog Architecture & Template**: Added `assets/rule-template.md` defining the canonical anatomy for authoring deterministic, agent-consumable rule catalogs (Rule ID, Impact Tier `CRITICAL|HIGH|MEDIUM|LOW`, Problem Rationale, ❌ Incorrect Snippet, ✅ Correct Snippet, Edge Cases & Safety Boundaries).
+- **Rule Catalog Complexity Trigger (Trigger 5)**: Updated `references/memory/growth-rule.md` to introduce Trigger 5, mandating that skills with $\ge 15$ operational guidelines or lints organize rules into prioritized impact tiers.
+- **Rule Catalog Pattern Standard**: Updated `references/memory/spec.md` with architectural guidelines for organizing large rule repositories into lazy-loaded operational memory.
+
+---
+
 ## [2.0.2] - 2026-08-25
 
 ### Fixed
