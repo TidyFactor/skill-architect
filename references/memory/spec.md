@@ -26,7 +26,7 @@ Start flat (one file per category). Split into a folder only when a category hol
 - **Workflow** — the ordered steps for exactly one outcome. Every workflow ends with a validation checklist that defines what "done, correctly" means for that outcome.
 - **Memory** — operational context loaded at runtime: facts, terminology, templates, domain rules, constraints. Not narrative, not justification, not "why we do this."
 
-## The 12 Structural Rules
+## The 13 Structural Rules
 
 1. **Dispatcher Discipline.** `SKILL.md` is a router (~350 tokens), not a task-doer. It assembles only what a given task needs — a command loads one workflow and the memory that workflow needs, not everything in the skill. If a command file contains the actual instructions for producing output, that content belongs in a workflow; move it.
 2. **One Workflow = One Outcome.** A workflow covering two distinct outcomes must be split into two. Every workflow defines validation — a checklist, not a vague success description.
@@ -40,6 +40,7 @@ Start flat (one file per category). Split into a folder only when a category hol
 10. **Tool Permission Declaration.** Skills that execute code via `tools/` must declare their tooling scope in `SKILL.md` dispatcher body. List: (a) languages invoked (node, python, shell), (b) whether tools are read-only or mutate files, (c) whether network access is required. This narrows the security surface and enables future `allowed-tools` frontmatter integration. Skills with no `tools/` directory skip this rule.
 11. **Memory Freshness.** Every operational memory file must include a `<!-- last-verified: YYYY-MM-DD -->` HTML comment at the top, below the heading. During `audit`, verify that no memory file's last-verified date exceeds 180 days. Stale memory is flagged as a compliance warning (not a hard fail) but must be addressed before the next MINOR or MAJOR release.
 12. **Skill vs MCP Boundary.** A capability belongs inside the skill (as a memory/workflow file) when it is: static knowledge, a decision framework, or a template. A capability belongs in an external MCP server when it: calls live APIs, queries databases, or performs stateful actions. If both layers are needed, the skill provides the decision logic and the MCP server provides the execution tools — never duplicate the same logic in both. Document the boundary in `SKILL.md` dispatcher body when a skill has a companion MCP server.
+13. **Two-Tier Multi-Language Documentation.** Every skill enforces a distinct separation between Canonical Global Technical Documentation (`README.md` SSOT) and First-Class Market Localizations (`README.ar.md`, `README.fa.md`, `README.es.md`, `README.pt.md`, `README.zh.md`, `README.de.md`, `README.fr.md`). All localized documentation must feature the universal 8-language switcher bar, be declared in `package.json["files"]`, staged in `build-skill.js`, and checked by `validate_skill.py`.
 
 ## The Contextual Decision Layer (CDL) Pattern
 
