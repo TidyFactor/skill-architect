@@ -5,7 +5,7 @@
 
 **专为 Google Antigravity、Claude Code、Cursor、Codex 和 Windsurf 设计。**
 
-[![npm version](https://img.shields.io/npm/v/@alwkala/tidyfactor-skill-architect.svg?style=for-the-badge&color=6366F1&logo=npm)](https://www.npmjs.com/package/@alwkala/tidyfactor-skill-architect)
+[![npm version](https://img.shields.io/npm/v/@tidyfactor/skill-architect.svg?style=for-the-badge&color=6366F1&logo=npm)](https://www.npmjs.com/package/@tidyfactor/skill-architect)
 [![License: Apache-2.0](https://img.shields.io/badge/License-Apache--2.0-blue.svg?style=for-the-badge)](LICENSE)
 [![Ecosystem](https://img.shields.io/badge/TidyFactor-Skills--LAB-purple.svg?style=for-the-badge)](https://github.com/TidyFactor)
 [![Compatibility](https://img.shields.io/badge/Agents-Antigravity%20|%20Claude%20|%20Cursor%20|%20Codex-orange.svg?style=for-the-badge)](SKILL.md)

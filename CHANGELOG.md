@@ -61,7 +61,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.1.1] - 2026-08-25
 
 ### Fixed
-- **CLI Executable & NPX Packaging**: Added standard `"add-skill": "bin/add-skill.js"` mapping in `package.json` to ensure unified `npx @alwkala/tidyfactor-skill-architect add-skill` execution.
+- **CLI Executable & NPX Packaging**: Added standard `"add-skill": "bin/add-skill.js"` mapping in `package.json` to ensure unified `npx @tidyfactor/cli-skill-architect add-skill` execution.
 - **Workflow Compliance**: Standardized header in `references/workflows/audit-skill.md` to `## Validation checklist`.
 
 ---

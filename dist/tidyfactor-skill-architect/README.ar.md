@@ -169,10 +169,10 @@ Skills-LAB/tidyfactor-skill-architect/ (المصدر الأساسي SSOT)
 ### 1. عبر مدير الحزم NPM / NPX
 ```bash
 # الإضافة المباشرة إلى بيئة عمل الوكيل النشطة
-npx @alwkala/tidyfactor-skill-architect
+npx @tidyfactor/cli-skill-architect
 
 # أو التثبيت العام على مستوى النظام
-npm install -g @alwkala/tidyfactor-skill-architect
+npm install -g @tidyfactor/skill-architect
 ```
 
 ### 2. التسجيل اليدوي في بيئات الذكاء الاصطناعي
