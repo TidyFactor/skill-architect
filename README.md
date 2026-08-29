@@ -168,10 +168,10 @@ Skills-LAB/tidyfactor-skill-architect/ (SSOT)
 ### 1. Via NPM / NPX
 ```bash
 # Add directly to your active agent workspace
-npx @alwkala/tidyfactor-skill-architect
+npx @tidyfactor/cli-skill-architect
 
 # Or install globally
-npm install -g @alwkala/tidyfactor-skill-architect
+npm install -g @tidyfactor/skill-architect
 ```
 
 ### 2. Manual Agent Registration

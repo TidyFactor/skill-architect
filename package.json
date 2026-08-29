@@ -1,5 +1,5 @@
 {
-  "name": "@alwkala/tidyfactor-skill-architect",
+  "name": "@tidyfactor/skill-architect",
   "version": "2.1.0",
   "description": "TidyFactor Skill Architect — Governance Layer & Methodology Engine for AI Coding Agent Skills",
   "main": "SKILL.md",
@@ -24,7 +24,7 @@
     "codex",
     "skill-methodology"
   ],
-  "author": "TidyFactor & Alwkala <hello@tidyfactor.com> (https://alwkala.com)",
+  "author": "TidyFactor <hello@tidyfactor.com> (https://tidyfactor.com)",
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
