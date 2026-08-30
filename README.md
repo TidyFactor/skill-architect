@@ -1,4 +1,4 @@
-# 🏛️ TidyFactor Skill Architect `v2.1.0`
+# 🏛️ TidyFactor Skill Architect `v2.1.1`
 
 > **The Canonical Governance Engine & Architecture Specification for AI Coding Agent Skills.**  
 > Enforces the **12 Structural Rules** of TidyFactor Skills across **Google Antigravity, Claude Code, Cursor, OpenAI Codex, and Windsurf**.

@@ -1,4 +1,4 @@
-# 🏛️ مهندس مهارات تايدي فاكتور (TidyFactor Skill Architect) `v2.1.0`
+# 🏛️ مهندس مهارات تايدي فاكتور (TidyFactor Skill Architect) `v2.1.1`
 
 > **المعيار الحاكم ومحرك البناء المعماري لمهارات وكلاء البرمجة بالذكاء الاصطناعي (AI Coding Agents).**  
 > يطبق **القواعد الهيكلية الاثنتي عشرة** لمنظومة TidyFactor عبر **Google Antigravity و Claude Code و Cursor و OpenAI Codex و Windsurf**.

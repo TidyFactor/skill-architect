@@ -1,7 +1,7 @@
 {
   "name": "@tidyfactor/skill-architect",
-  "version": "2.1.0",
-  "description": "TidyFactor Skill Architect — Governance Layer & Methodology Engine for AI Coding Agent Skills",
+  "version": "2.1.1",
+  "description": "TidyFactor Skill Architect \u2014 Governance Layer & Methodology Engine for AI Coding Agent Skills",
   "main": "SKILL.md",
   "bin": {
     "tidyfactor-skill-architect": "bin/add-skill.js",

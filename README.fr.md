@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🏛️ TidyFactor Skill Architect `v2.1.0`
+# 🏛️ TidyFactor Skill Architect `v2.1.1`
 ### Couche Maîtresse de Gouvernance et Moteur Méthodologique à 13 Règles pour Compétences d'Agents IA
 
 **Conçu pour Google Antigravity, Claude Code, Cursor, Codex et Windsurf.**
