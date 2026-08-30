@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🏛️ TidyFactor 技能架构师 `v2.1.0`
+# 🏛️ TidyFactor 技能架构师 `v2.1.1`
 ### AI 编程智能体技能的主治理层与 13 条结构化规则方法论引擎
 
 **专为 Google Antigravity、Claude Code、Cursor、Codex 和 Windsurf 设计。**

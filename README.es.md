@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🏛️ TidyFactor Skill Architect `v2.1.0`
+# 🏛️ TidyFactor Skill Architect `v2.1.1`
 ### Capa Maestra de Gobernanza y Motor de Metodología de 13 Reglas para Habilidades de Agentes de IA
 
 **Diseñado para Google Antigravity, Claude Code, Cursor, Codex y Windsurf.**

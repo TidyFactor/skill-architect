@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [2.1.1] - 2026-08-30
+
+### Added / Improved
+- **Rule 13 Enhancement**: Enriched Two-Tier Multi-Language Documentation standard to mandate Manifesto callout, Before/After visual comparison, and 8-badge suite (including Stars badge).
+- **Sync**: Updated canonical spec.md across all platforms.
+
+---
+
 ## [2.1.0] - 2026-08-27
 
 ### Added

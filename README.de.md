@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🏛️ TidyFactor Skill Architect `v2.1.0`
+# 🏛️ TidyFactor Skill Architect `v2.1.1`
 ### Master-Governance-Ebene und 13-Regeln-Methodik-Engine für KI-Coding-Agent-Skills
 
 **Entwickelt für Google Antigravity, Claude Code, Cursor, Codex und Windsurf.**
