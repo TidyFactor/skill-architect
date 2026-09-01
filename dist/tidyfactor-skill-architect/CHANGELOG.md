@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [2.2.0] - 2026-09-01
+
+### 🛠️ Added — Skill Manifest Tools JSON Schema
+- **Tools Contract JSON Schema (`references/schemas/skill-manifest.tools.schema.json`)**: Added authoritative JSON schema defining the `tools` section in `manifest.json` for all TidyFactor skills, formalizing `skill_root_anchor: "self"`, CLI invocation templates, and typed argument specs.
+- **Rule 10 Enhancement**: Codified runtime tooling requirements, sandboxing declarations, and execution boundaries.
+
+---
+
 ## [2.1.1] - 2026-08-30
 
 ### Added / Improved

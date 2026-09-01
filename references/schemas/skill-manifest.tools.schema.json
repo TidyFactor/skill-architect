@@ -1,0 +1,125 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tidyfactor.dev/schemas/skill-manifest.tools.schema.json",
+  "title": "TidyFactor Skill Manifest — tools section",
+  "description": "Defines the runtime-executable tools bundled with a TidyFactor skill (scripts/, never tools/ which is packaging/governance-only). Consumed by two independent readers: (a) any agent that needs to resolve a script's absolute path for standalone CLI execution, and (b) tidyfactor-brain's get_skill_manifest + future run_skill_tool dispatcher for deterministic, schema-validated execution. Both readers resolve paths against the SAME anchor, so there is exactly one source of truth for 'where is this script'.",
+  "type": "object",
+  "required": ["manifest_schema_version", "skill_id", "skill_root_anchor", "tools"],
+  "properties": {
+    "manifest_schema_version": {
+      "type": "string",
+      "const": "1.0.0",
+      "description": "Version of this schema itself, independent of the skill's own semver."
+    },
+    "skill_id": {
+      "type": "string",
+      "pattern": "^tidyfactor-[a-z0-9-]+$",
+      "description": "Must match the skill's directory name / SKILL.md id, e.g. 'tidyfactor-design'."
+    },
+    "skill_root_anchor": {
+      "type": "string",
+      "const": "self",
+      "description": "Fixed convention, not configurable: skill_root is ALWAYS the directory containing this manifest.json — never the caller's CWD, never the client project directory. This single rule is what eliminates the FileNotFoundError class of failure for every tool listed below, for every consumer."
+    },
+    "tools": {
+      "type": "array",
+      "minItems": 0,
+      "items": { "$ref": "#/$defs/tool" },
+      "description": "One entry per runtime-executable capability in scripts/. Purely documentary/reference scripts (e.g. one-off migration helpers) should NOT be listed here — only tools a command is meant to invoke."
+    }
+  },
+  "$defs": {
+    "tool": {
+      "type": "object",
+      "required": [
+        "name",
+        "description",
+        "entrypoint",
+        "invocation",
+        "output",
+        "runtime_requirements",
+        "invoked_by_commands"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]*$",
+          "description": "Unique id within this skill, e.g. 'audit_design'. When exposed via brain-mcp this becomes the MCP tool name: tidyfactor_{skill_id_short}_{name}."
+        },
+        "description": {
+          "type": "string",
+          "maxLength": 200,
+          "description": "One sentence, agent-facing. Shown verbatim in get_skill_manifest output and in the SKILL.md 'Runtime Tool Execution Contract' table (generated from this file, not hand-duplicated)."
+        },
+        "entrypoint": {
+          "type": "object",
+          "required": ["runtime", "script"],
+          "properties": {
+            "runtime": { "type": "string", "enum": ["python3", "node"] },
+            "script": {
+              "type": "string",
+              "description": "Path relative to skill_root, e.g. 'scripts/audit_design.py'. Never a bare filename, never absolute, never relative to CWD."
+            }
+          }
+        },
+        "invocation": {
+          "type": "object",
+          "required": ["cli_pattern", "args"],
+          "properties": {
+            "cli_pattern": {
+              "type": "string",
+              "description": "Template a CLI-only agent fills in directly. Placeholders: {runtime} {skill_root} {script} {target_path} {flags}."
+            },
+            "args": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": ["name", "type", "required"],
+                "properties": {
+                  "name": { "type": "string" },
+                  "type": { "type": "string", "enum": ["path", "string", "boolean", "number"] },
+                  "required": { "type": "boolean" },
+                  "default": {},
+                  "flag": { "type": "string", "description": "CLI flag this arg maps to, e.g. '--fix'." },
+                  "description": { "type": "string" }
+                }
+              }
+            }
+          }
+        },
+        "output": {
+          "type": "object",
+          "required": ["format", "channel"],
+          "properties": {
+            "format": { "type": "string", "enum": ["json", "text"] },
+            "channel": { "type": "string", "enum": ["stdout", "file"] },
+            "schema_ref": {
+              "type": "string",
+              "description": "Optional path, relative to skill_root, to a JSON Schema for this tool's output — lets any consumer parse results deterministically regardless of transport."
+            }
+          }
+        },
+        "runtime_requirements": {
+          "type": "object",
+          "required": ["isolation_recommended", "dependencies"],
+          "properties": {
+            "isolation_recommended": {
+              "type": "boolean",
+              "description": "true = should run inside tidyfactor-brain's managed environment (heavy/native deps, e.g. image processing). false = safe for any agent to run inline via bash with no extra setup — this is the majority case and must stay dependency-free for external GitHub installs."
+            },
+            "dependencies": {
+              "type": "array",
+              "items": { "type": "string" },
+              "description": "pip/npm package names beyond stdlib. Empty array if none."
+            }
+          }
+        },
+        "invoked_by_commands": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Command names (from references/commands/*.md) that call this tool. Keeps the SKILL.md contract table auto-derivable instead of a second hand-maintained copy that can drift."
+        }
+      }
+    }
+  }
+}
