@@ -43,3 +43,12 @@ Every command execution enforces three distinct context boundaries:
 1. **Single Routing Layer**: Maintain exactly one level of progressive disclosure (`SKILL.md` → Command → Workflow + Memory). Avoid multi-layer nested sub-dispatchers.
 2. **Negative Triggers (Anti-Triggers)**: Every skill frontmatter `description` must declare explicit negative triggers (what the skill does NOT do) to prevent accidental context waste.
 3. **Lazy Memory Loading**: Commands must explicitly specify which memory files to load and which to omit.
+
+---
+
+## 4. Contextual Decision Layer (CDL) Token Savings
+
+The Context Delta Resolution formula ($\text{Unknowns} = \text{Required Decisions} - (\text{Discovered Facts} \cup \text{Brain KIs})$) provides massive token savings:
+1. **Zero Redundant Questions**: Proactively reading local disk files (`brand.json`, `.tidyfactor/*`) eliminates multi-turn clarifying Q&A rounds, saving 1,000+ tokens per interactive session.
+2. **Deterministic Fallbacks**: Structured multiple-choice (A/B/C/D) reduces open-ended prose exchanges.
+3. **Cached Baseline Injection**: Downstream commands load the synthesized `.tidyfactor/<skill>-brief.md` directly instead of re-prompting the user.

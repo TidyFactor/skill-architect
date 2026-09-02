@@ -30,6 +30,7 @@ const OUT_FILE =
 
 const ROOT_COPIES = [
   "SKILL.md",
+  "manifest.json",
   "references",
   "assets",
   "tools",

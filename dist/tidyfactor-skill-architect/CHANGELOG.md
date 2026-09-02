@@ -5,6 +5,21 @@ All notable changes to `tidyfactor-skill-architect` will be documented in this f
 The format is based on [Keep a CHANGELOG](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.4.0] - 2026-09-02
+
+### 🏛️ Added — Contextual Decision Layer (CDL v1.1.0) & Declarative Decision Gates Standard
+- **Rule 14 Enhancement (`references/memory/spec.md`)**: Upgraded Rule 14 to formalize the **Contextual Decision Layer (CDL) & Context Delta Resolution**:
+  1. **Mechanical Context Delta Resolution**: Codified the set-theoretic formula:
+     $$\text{Unknowns} = \text{Required Decisions} - (\text{Discovered Facts} \cup \text{Brain KIs})$$
+  2. **Declarative Decision Gates (`manifest.json`)**: Formalized `decision_gates[]` contract in manifest schema v1.1.0 (`references/schemas/skill-manifest.schema.json` and `skill-manifest.tools.schema.json`).
+  3. **Interactive Disclosure & User Agency First**: All genuine Unknowns are presented interactively with structured options (A/B/C/D) and priority ordering, with zero arbitrary truncation.
+  4. **Local Staleness Tracking**: `track_staleness: true` on file sources for local zero-latency drift detection via hash/mtime comparison.
+  5. **Anti-Dual-Write & Fail-Open Non-Blocking SSOT**: Strict local file primacy (`.tidyfactor/*-brief.md`), one-way outbound cloud sync (`--sync-brain`), and zero-latency Fail-Open protocol on Brain MCP absence.
+- **Validation Engine Upgrade (`tools/validate_skill.py`)**: Added check `[12]` for mechanical verification of `decision_gates` schema compliance and Anti-Dual-Write constraints.
+- **Token Economy Updates (`references/memory/context-budget.md`)**: Documented CDL token savings through pre-flight Delta resolution.
+
+---
+
 ## [2.3.0] - 2026-09-02
 
 ### 🏛️ Added — Rule 14: Dual Discovery & Active Context Synthesis Standard
