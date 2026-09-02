@@ -256,6 +256,57 @@ def main():
     if not mcp_refs:
         print("  [OK] No external MCP dependencies detected (N/A).")
 
+    # 12. Contextual Decision Layer & Decision Gates (Rule 14 / CDL v1.1.0)
+    print("\n[12] Checking Contextual Decision Layer & Decision Gates (Rule 14 / CDL v1.1.0)...")
+    if manifest_file.exists():
+        try:
+            m_data = json.loads(manifest_file.read_text(encoding="utf-8"))
+            d_gates = m_data.get("decision_gates")
+            if d_gates is not None:
+                if not isinstance(d_gates, list):
+                    errors.append("manifest.json 'decision_gates' must be an array.")
+                else:
+                    gate_errors = 0
+                    for gate in d_gates:
+                        if not isinstance(gate, dict):
+                            errors.append("Invalid decision_gate item (must be an object).")
+                            gate_errors += 1
+                            continue
+                        cmd = gate.get("command")
+                        decs = gate.get("decisions", [])
+                        if not cmd or not isinstance(cmd, str):
+                            errors.append("decision_gate missing 'command' string.")
+                            gate_errors += 1
+                        if not decs or not isinstance(decs, list):
+                            errors.append(f"decision_gate for '{cmd}' has empty or invalid 'decisions' array.")
+                            gate_errors += 1
+                        for dec in decs:
+                            k = dec.get("key")
+                            disc = dec.get("discovery", [])
+                            persist = dec.get("persist_to", {})
+                            if not k or not isinstance(k, str):
+                                errors.append(f"decision in gate '{cmd}' missing 'key'.")
+                                gate_errors += 1
+                            if not disc or not isinstance(disc, list):
+                                errors.append(f"decision '{k}' in gate '{cmd}' missing 'discovery' list.")
+                                gate_errors += 1
+                            loc = persist.get("local", {}) if isinstance(persist, dict) else {}
+                            if not loc or not loc.get("path"):
+                                errors.append(f"decision '{k}' in gate '{cmd}' missing persist_to.local.path (Rule 14 Anti-Dual-Write SSOT violation).")
+                                gate_errors += 1
+                            bki = persist.get("brain_ki") if isinstance(persist, dict) else None
+                            if bki and bki.get("sync_direction") != "outbound_push_only":
+                                errors.append(f"decision '{k}' in gate '{cmd}' persist_to.brain_ki.sync_direction must be 'outbound_push_only' (Dual-Write Anti-Pattern).")
+                                gate_errors += 1
+                    if gate_errors == 0:
+                        print(f"  [OK] manifest.json contains {len(d_gates)} valid decision gate(s) (CDL v1.1.0 compliant).")
+            else:
+                print("  [OK] No decision_gates declared (N/A).")
+        except Exception as e:
+            pass
+    else:
+        print("  [OK] No manifest.json (N/A).")
+
     print("\n" + "=" * 60)
     if errors:
         print(f"[FAIL] {len(errors)} validation error(s) found:")

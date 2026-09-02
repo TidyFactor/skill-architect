@@ -1,0 +1,41 @@
+{
+  "manifest_schema_version": "1.1.0",
+  "skill_id": "tidyfactor-skill-architect",
+  "skill_root_anchor": "self",
+  "tools": [],
+  "decision_gates": [
+    {
+      "command": "create",
+      "description": "Decision gate before scaffolding a new skill architecture.",
+      "decisions": [
+        {
+          "key": "skill_type",
+          "description": "What tier does this skill belong to?",
+          "type": "enum",
+          "options": ["community", "pro"],
+          "default": "community",
+          "priority": 1,
+          "discovery": [
+            { "source": "workspace_scan", "path": "package.json" }
+          ],
+          "persist_to": {
+            "local": { "path": ".tidyfactor/architect-brief.snapshot.json" }
+          }
+        },
+        {
+          "key": "has_runtime_scripts",
+          "description": "Will this skill provide executable runtime tools in scripts/?",
+          "type": "boolean",
+          "default": false,
+          "priority": 2,
+          "discovery": [
+            { "source": "workspace_scan", "path": "scripts/" }
+          ],
+          "persist_to": {
+            "local": { "path": ".tidyfactor/architect-brief.snapshot.json" }
+          }
+        }
+      ]
+    }
+  ]
+}

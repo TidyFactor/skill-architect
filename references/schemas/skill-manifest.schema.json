@@ -1,8 +1,8 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://tidyfactor.dev/schemas/skill-manifest.tools.schema.json",
-  "title": "TidyFactor Skill Manifest — Tools & Decision Gates Schema (v1.1.0)",
-  "description": "Defines the runtime manifest for a TidyFactor skill, covering both runtime-executable tools (scripts/) and Contextual Decision Layer gates (decision_gates[]).",
+  "$id": "https://tidyfactor.dev/schemas/skill-manifest.schema.json",
+  "title": "TidyFactor Skill Manifest — Unified Tools & Decision Gates Schema (v1.1.0)",
+  "description": "Defines the authoritative runtime manifest for a TidyFactor skill, covering both runtime-executable tools (scripts/) and Contextual Decision Layer gates (decision_gates[]). Consumed by AI agents for deterministic CLI/workflow execution and by tidyfactor-brain for governance and tool dispatching.",
   "type": "object",
   "required": ["manifest_schema_version", "skill_id", "skill_root_anchor"],
   "properties": {
