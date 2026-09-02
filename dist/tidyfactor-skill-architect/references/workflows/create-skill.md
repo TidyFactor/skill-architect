@@ -28,6 +28,7 @@ One outcome: a new skill folder that is compliant with `memory/spec.md`, `memory
 
 5. **Write Workflow File(s)**:
    - Step-by-step procedure for exactly one outcome.
+   - Embed **Dual Discovery Engine**: (a) Step 0 Context Auto-Sensing (scans workspace files, briefs, config before asking anything), (b) Structured Interactive Options (presents crisp A/B/C/D choices when input is needed), (c) Zero Bot Preambles (no persona greetings or lecturing).
    - Concludes with a concrete `## Validation checklist`.
 
 6. **Write Memory File(s)**:
@@ -55,10 +56,12 @@ One outcome: a new skill folder that is compliant with `memory/spec.md`, `memory
 - [ ] `SKILL.md` token count within budget (~350 tokens) and contains explicit anti-triggers
 - [ ] `SKILL.md` contains no domain knowledge or embedded rules text, only routing
 - [ ] `SKILL.md` frontmatter `description` follows "what + when" pattern and is ≤ 1024 chars
-- [ ] Every workflow ends in a concrete checklist
+- [ ] Every workflow implements Dual Discovery (Auto-Sensing first + Structured Interactive Options) and ends in a concrete checklist
 - [ ] No single-file subfolders (Rule 4: No empty structures)
 - [ ] Operational memory contains zero marketing narrative or unisolated philosophy
 - [ ] All memory files have `<!-- last-verified: YYYY-MM-DD -->` comments
 - [ ] If `tools/` exists, `SKILL.md` includes Tooling Scope section (Rule 10)
+- [ ] Two-tier multi-language documentation generated and verified (Rule 13)
+- [ ] Zero robot preambles or dry textbook dumps present (Rule 14)
 - [ ] Test scenarios file exists with ≥ 3 scenarios
 - [ ] Automated validation (`validate_skill.py`) passes without errors
