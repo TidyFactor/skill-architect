@@ -183,16 +183,36 @@ def main():
                 except Exception as e:
                     errors.append(f"SKILL.md YAML frontmatter parsing failed: {e}")
 
-    # 9. Tooling Scope Declaration (Rule 10)
-    print("\n[9] Checking Tooling Scope declaration (Rule 10)...")
+    # 9. Runtime Tooling Manifest & Scope Declaration (Rule 10)
+    print("\n[9] Checking Runtime Tooling Manifest & Scope declaration (Rule 10)...")
+    scripts_dir = root / "scripts"
+    manifest_file = root / "manifest.json"
     tools_dir = root / "tools"
-    has_executable_tools = tools_dir.exists() and any(
-        f.suffix in [".py", ".js", ".sh", ".ts"] for f in tools_dir.iterdir() if f.is_file()
-    )
+    
+    if scripts_dir.exists() and any(scripts_dir.glob("*.py")):
+        if not manifest_file.exists():
+            errors.append("Skill has scripts/ directory but is missing authoritative manifest.json (Rule 10)")
+            print("  [FAIL] Missing manifest.json for runtime scripts.")
+        else:
+            try:
+                m_data = json.loads(manifest_file.read_text(encoding="utf-8"))
+                req_keys = ["manifest_schema_version", "skill_id", "skill_root_anchor", "tools"]
+                missing = [k for k in req_keys if k not in m_data]
+                if missing:
+                    errors.append(f"manifest.json missing required fields: {missing}")
+                elif m_data.get("skill_root_anchor") != "self":
+                    errors.append("manifest.json 'skill_root_anchor' must be 'self'")
+                else:
+                    tools_count = len(m_data.get("tools", []))
+                    print(f"  [OK] manifest.json valid ({tools_count} runtime tools declared, anchor: self).")
+            except Exception as e:
+                errors.append(f"manifest.json parsing error: {e}")
+                
+    has_executable_tools = (tools_dir.exists() and any(tools_dir.glob("*.py"))) or (scripts_dir.exists() and any(scripts_dir.glob("*.py")))
     if has_executable_tools and skill_md.exists():
         skill_text = skill_md.read_text(encoding="utf-8")
         if "tooling scope" not in skill_text.lower():
-            warnings.append("Skill has tools/ directory but SKILL.md is missing '## Tooling Scope' section (Rule 10)")
+            warnings.append("Skill has tooling but SKILL.md is missing '## Tooling Scope' section (Rule 10)")
             print("  [WARN] Missing '## Tooling Scope' section in SKILL.md.")
         else:
             has_lang = any(k in skill_text.lower() for k in ["language", "languages", "python", "node", "shell"])

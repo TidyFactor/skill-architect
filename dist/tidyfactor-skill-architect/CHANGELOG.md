@@ -5,6 +5,17 @@ All notable changes to `tidyfactor-skill-architect` will be documented in this f
 The format is based on [Keep a CHANGELOG](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.3.0] - 2026-09-02
+
+### 🏛️ Added — Rule 14: Dual Discovery & Active Context Synthesis Standard
+- **Rule 14 Codification (`references/memory/spec.md`)**: Enforced mandatory Dual Discovery Engine across all TidyFactor skills:
+  1. **Proactive Context Exploration First**: Workflows MUST automatically scan the local workspace (`BRAND-GUIDELINES.md`, `.tidyfactor/*` briefs, codebase structure, configs, open files) before asking the user anything.
+  2. **Structured Interactive Options**: Banned passive monologues and text dumps; skills must present concise, numbered/lettered multiple-choice options (A/B/C/D) for genuine strategic choices.
+  3. **Zero Robotic Preambles**: Banned bot persona greetings, self-introductions, and methodology lecturing.
+  4. **Context Synthesis**: Synthesize discovered facts and confirmed choices into persistent project baselines.
+- **Workflow Auditing & Creation Updates**: Updated `references/workflows/audit-skill.md` (14/14 compliance score) and `references/workflows/create-skill.md` to audit and enforce Rule 14.
+- **Workspace Rules Governance**: Synchronized master `AGENTS.md` across `Skills-LAB` and `Skills-pro-pack`.
+
 ---
 
 ## [2.2.0] - 2026-09-01
