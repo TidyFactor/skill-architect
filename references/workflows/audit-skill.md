@@ -6,7 +6,7 @@ One outcome: a compliance report against `memory/spec.md`, with specific fixes â
 
 1. Read the target's `SKILL.md` in full.
 2. Read every file under its `references/` (and `assets/`, `bin/`, `tools/`, `dist/` if present).
-3. Score against each of spec.md's 14 rules as pass/fail, not a vague impression:
+3. Score against each of spec.md's 15 rules as pass/fail, not a vague impression:
    - Does skill.md dispatch, or does it do the task itself?
    - Does every workflow file map to exactly one outcome, with a checklist?
    - Is memory factual/operational, or is it narrative/rationale?
@@ -21,12 +21,13 @@ One outcome: a compliance report against `memory/spec.md`, with specific fixes â
    - If the skill has a companion MCP server, is the skill-vs-MCP boundary documented in the dispatcher body?
    - Does the skill provide two-tier multi-language documentation (Canonical README.md + 7 localized translations with 8-language switcher bar)?
    - Does the skill enforce Dual Discovery & Active Context Synthesis (auto-scanning workspace context first, structured interactive options without monologues, and zero robotic persona preambles)?
+   - Does the skill enforce Token Efficiency & Semantic Density (prioritizing YAML over JSON for cognitive tokens, brand schemas, decision snapshots, and memory matrices; reserving JSON for machine runtime; and providing dual-engine fallback support)?
 4. For every failed item, name the specific file and the specific fix â€” "split references/memory.md at line 140 because it covers two markets" beats "memory file is too long."
 
 ## Report format
 
 ```
-## Compliance: X/14 rules pass
+## Compliance: X/15 rules pass
 
 - [pass/fail] Dispatcher discipline â€” <file:line if fail>
 - [pass/fail] One-workflow-one-outcome + checklist â€” <file if fail>
@@ -42,6 +43,7 @@ One outcome: a compliance report against `memory/spec.md`, with specific fixes â
 - [pass/fail/N/A] Skill vs MCP boundary â€” <undocumented boundary if fail>
 - [pass/fail] Two-tier multi-language documentation â€” <missing locales or switcher if fail>
 - [pass/fail] Dual Discovery & Active Context Synthesis â€” <bot preamble or context blindness if fail>
+- [pass/fail] Token efficiency & YAML primacy â€” <JSON cognitive bloat / missing fallback if fail>
 
 ### Fixes
 1. <specific, file-level fix>
@@ -52,5 +54,5 @@ One outcome: a compliance report against `memory/spec.md`, with specific fixes â
 
 - [ ] Every fail has a named file and a concrete fix, not a generic note
 - [ ] Report doesn't recommend adding new files unless a growth-rule.md trigger is explicitly cited
-- [ ] Score is out of 14, matching spec.md's current rule count
+- [ ] Score is out of 15, matching spec.md's current rule count
 - [ ] Memory freshness is reported as warn (not fail) for dates > 180 days

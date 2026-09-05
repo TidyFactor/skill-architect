@@ -33,23 +33,39 @@ def main():
     print("\n[1] Checking SemVer synchronization across metadata...")
     pkg_file = root / "package.json"
     tf_file = root / ".tidyfactor"
-    brand_file = root / "brand.json"
+    brand_yaml_file = root / "brand.yaml"
+    brand_json_file = root / "brand.json"
     cl_file = root / "CHANGELOG.md"
     
     pkg_ver = json.loads(pkg_file.read_text(encoding="utf-8")).get("version") if pkg_file.exists() else None
     tf_ver = json.loads(tf_file.read_text(encoding="utf-8")).get("version") if tf_file.exists() else None
     
-    brand_data = json.loads(brand_file.read_text(encoding="utf-8")) if brand_file.exists() else {}
+    brand_data = {}
+    brand_source = None
+    if brand_yaml_file.exists():
+        brand_source = "brand.yaml"
+        try:
+            import yaml
+            brand_data = yaml.safe_load(brand_yaml_file.read_text(encoding="utf-8")) or {}
+        except ImportError:
+            for line in brand_yaml_file.read_text(encoding="utf-8").splitlines():
+                if line.strip().startswith("version:"):
+                    brand_data = {"version": line.split(":", 1)[1].strip().strip('"').strip("'")}
+                    break
+    elif brand_json_file.exists():
+        brand_source = "brand.json"
+        brand_data = json.loads(brand_json_file.read_text(encoding="utf-8"))
+    
     brand_ver = brand_data.get("version") or brand_data.get("meta", {}).get("version")
     
     print(f"  package.json : {pkg_ver}")
     print(f"  .tidyfactor  : {tf_ver}")
-    print(f"  brand.json   : {brand_ver}")
+    print(f"  {brand_source or 'brand.yaml/json'}: {brand_ver}")
     
     if not (pkg_ver and tf_ver and brand_ver and pkg_ver == tf_ver == brand_ver):
-        errors.append(f"Version mismatch: package.json({pkg_ver}) vs .tidyfactor({tf_ver}) vs brand.json({brand_ver})")
+        errors.append(f"Version mismatch: package.json({pkg_ver}) vs .tidyfactor({tf_ver}) vs {brand_source}({brand_ver})")
     else:
-        print(f"  [OK] Version {pkg_ver} synchronized across all JSON metadata.")
+        print(f"  [OK] Version {pkg_ver} synchronized across metadata ({brand_source}).")
         
     if cl_file.exists():
         cl_text = cl_file.read_text(encoding="utf-8")
@@ -306,6 +322,24 @@ def main():
             pass
     else:
         print("  [OK] No manifest.json (N/A).")
+
+    # 13. Token Efficiency & YAML Primacy (Rule 15)
+    print("\n[13] Checking Token Efficiency & YAML Primacy (Rule 15)...")
+    if brand_yaml_file.exists():
+        print("  [OK] brand.yaml present (cognitive layer prioritized for token efficiency).")
+    elif brand_json_file.exists():
+        print("  [INFO] brand.json detected. Adopting brand.yaml is recommended under Rule 15 for 35-50% token efficiency.")
+    else:
+        warnings.append("Missing brand.yaml (or brand.json).")
+
+    # Verify wire protocol boundary (package.json and manifest.json must remain strictly JSON)
+    for wire_file in [pkg_file, manifest_file]:
+        if wire_file.exists():
+            try:
+                json.loads(wire_file.read_text(encoding="utf-8"))
+                print(f"  [OK] Wire protocol {wire_file.name} strictly conforms to JSON.")
+            except Exception as e:
+                errors.append(f"Wire protocol file {wire_file.name} must be valid JSON: {e}")
 
     print("\n" + "=" * 60)
     if errors:

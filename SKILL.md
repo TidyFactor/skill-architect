@@ -5,7 +5,7 @@ description: "Master governance layer for AI Coding Agent Skills. Use when build
 
 # TidyFactor Skill Architect
 
-A command dispatcher. This file does not do the work itself — it routes to the right command, which routes to the right workflow, which injects the right memory. Read `references/memory/spec.md` once per session before dispatching; it is the canonical rule set (12 structural rules) every command below enforces.
+A command dispatcher. This file does not do the work itself — it routes to the right command, which routes to the right workflow, which injects the right memory. Read `references/memory/spec.md` once per session before dispatching; it is the canonical rule set (15 structural rules) every command below enforces.
 
 ## Commands
 
@@ -20,11 +20,11 @@ Read only the command file that matches the request. Do not read all four.
 
 ## Non-negotiable constraints
 
-The 12 structural rules every skill this layer produces must satisfy live in `references/memory/spec.md` — read them before drafting or auditing anything; do not restate them here. Embedding the rule text in this dispatcher would itself violate Rule 1 (Dispatcher Discipline).
+The 15 structural rules every skill this layer produces must satisfy live in `references/memory/spec.md` — read them before drafting or auditing anything; do not restate them here. Embedding the rule text in this dispatcher would itself violate Rule 1 (Dispatcher Discipline).
 
 ## Handoff to skill-creator
 
-Once a command has assembled the runtime context (workflow + memory + skeleton), continue with skill-creator's normal loop (`/mnt/skills/examples/skill-creator/SKILL.md`) for the interview, test prompts, validation (`quick_validate`), and packaging (`package_skill.py`) — but the draft skill-creator produces at its "Write the SKILL.md" step must satisfy `spec.md`'s 12 rules before you run `quick_validate`.
+Once a command has assembled the runtime context (workflow + memory + skeleton), continue with skill-creator's normal loop (`/mnt/skills/examples/skill-creator/SKILL.md`) for the interview, test prompts, validation (`quick_validate`), and packaging (`package_skill.py`) — but the draft skill-creator produces at its "Write the SKILL.md" step must satisfy `spec.md`'s 15 rules before you run `quick_validate`.
 
 ## Tooling Scope (Rule 10)
 

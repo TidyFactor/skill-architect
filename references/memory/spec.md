@@ -1,10 +1,10 @@
 # TidyFactor Skill Spec
 
-<!-- last-verified: 2026-08-25 -->
+<!-- last-verified: 2026-09-05 -->
 
 Canonical structural rules. Every command and workflow in this skill enforces these. Pure rules — no rationale, no branding language (that's in `philosophy.md`, kept separate on purpose).
 
-This file mirrors the 12 Structural Rules defined in the master `AGENTS.md` (TidyFactor Skills-LAB Master Workspace Rules). If the two ever diverge, the master `AGENTS.md` wins — update this file, not the other way around.
+This file mirrors the 15 Structural Rules defined in the master `AGENTS.md` (TidyFactor Skills-LAB Master Workspace Rules). If the two ever diverge, the master `AGENTS.md` wins — update this file, not the other way around.
 
 ## Anatomy
 
@@ -26,7 +26,7 @@ Start flat (one file per category). Split into a folder only when a category hol
 - **Workflow** — the ordered steps for exactly one outcome. Every workflow ends with a validation checklist that defines what "done, correctly" means for that outcome.
 - **Memory** — operational context loaded at runtime: facts, terminology, templates, domain rules, constraints. Not narrative, not justification, not "why we do this."
 
-## The 14 Structural Rules
+## The 15 Structural Rules
 
 1. **Dispatcher Discipline.** `SKILL.md` is a router (~350 tokens), not a task-doer. It assembles only what a given task needs — a command loads one workflow and the memory that workflow needs, not everything in the skill. If a command file contains the actual instructions for producing output, that content belongs in a workflow; move it.
 2. **One Workflow = One Outcome.** A workflow covering two distinct outcomes must be split into two. Every workflow defines validation — a checklist, not a vague success description.
@@ -50,17 +50,22 @@ Start flat (one file per category). Split into a folder only when a category hol
     - **Zero Robotic Preamble**: Strictly forbid bot persona greetings, self-introductions, lecturing, or textbook dumps.
     - **Local Staleness Tracking**: For file sources marked with `track_staleness: true`, the engine compares file hash/mtime at read time against snapshot values. A changed hash re-opens the decision locally without network or MCP overhead.
     - **Anti-Dual-Write & Fail-Open SSOT Doctrine**: The local workspace file (`.tidyfactor/*-brief.md` or `*.snapshot.json`) is the SOLE Single Source of Truth. Brain/Cloud synchronization is strictly an Outbound Push (`--sync-brain`) executed after local success. Brain MCP lookup must FAIL OPEN silently (0ms latency penalty) if unavailable.
+15. **Token Efficiency & Semantic Density Doctrine (YAML Primacy).**
+    - **Cognitive Layer Primacy**: All brand tokens, design schemas, decision gate snapshots, and architecture matrices MUST prioritize **YAML** format (`brand.yaml`, `*.brief.yaml`, `*.snapshot.yaml`, memory schemas) over JSON. This saves 35–50% in context tokens and eliminates syntax noise (`{`, `}`, `"`, `,`).
+    - **Dual-Engine Backward Compatibility**: Tooling and workflows must support `brand.yaml` first, falling back to `brand.json` for legacy projects.
+    - **Wire Protocol Boundary**: JSON is strictly reserved for external machine runtime standards (`package.json` for NPM, `manifest.json` for MCP stdio JSON-RPC 2.0). Never use JSON where YAML can deliver identical semantics with higher token efficiency.
 
 
-## The Contextual Decision Layer (CDL) Pattern
+## The Contextual Decision Layer (CDL v2.0) & DM-DA Protocol
 
-For skills where execution depends on architectural or strategic choices (e.g. `tidyfactor-design`, `tidyfactor-marketing`, `tidyfactor-doc`, `tidyfactor-styler`, `tidyfactor-next`):
-1. **Declarative Decision Manifest (`manifest.json["decision_gates"]`)**: Formally declare each gate's `command`, `decisions[]`, `discovery[]` sources, `persist_to` targets, and `default` values.
-2. **Context Delta Resolution Engine**: Automatically evaluate $\text{Unknowns} = \text{Required} - (\text{Discovered} \cup \text{KIs})$ at runtime.
-3. **Structured Interactive Dialogue**: Present unresolved decisions with clear, contextual multiple-choice options (A/B/C/D) and highlighted recommendations.
-4. **Local Snapshot & Persistence**: Cache confirmed parameters in `.tidyfactor/<skill>-brief.md` and/or `*.snapshot.json` to lock downstream commands silently to the confirmed baseline.
-5. **Anti-Dual-Write & Outbound Push**: Treat local files as the sole SSOT. Replicate to Brain KIs only upon explicit user request (`--sync-brain`).
-6. **Decision Alignment Axis**: When applicable, include Axis 7 (`D` - Decision Alignment) in Pre-Emit Self-Critiques to verify that generated artifacts strictly adhere to the confirmed brief.
+For skills where execution depends on architectural or strategic choices (e.g. `tidyfactor-design`, `tidyfactor-marketing`, `tidyfactor-doc`, `tidyfactor-styler`, `tidyfactor-next`), the agent acts as the **TidyFactor Dual-Mode Decision Architect (DM-DA)**:
+1. **Declarative Decision Manifest (`manifest.json["decision_gates"]`)**: Formally declare each gate's `command`, `decisions[]`, `discovery[]` sources, `persist_to` targets, and `default` values conforming to schema v1.1.0.
+2. **Context Delta Resolution Engine**: Automatically evaluate $\text{Unknowns} = \text{Required Decisions} - (\text{Discovered Facts} \cup \text{Brain KIs})$ at runtime with zero robotic preamble.
+3. **Dual Operational Modes**:
+   - **[MODE A] Smart 3-Round Protocol (🎯 الارتجال الذكي المقيد)**: Fast-track structured alignment in 3 deterministic rounds (Round 1: Root & Mission → Round 2: Boundaries & Stack → Round 3: Final Conflicts & Safe Defaults). Strictly terminates at Round 3, emits local SSOT brief, and explicitly presents an escalation gate: *"Adopt baseline immediately OR escalate to Debate Mode?"*
+   - **[MODE B] Relentless Debate & Interview (🔥 الاستجواب والمناظرة اللانهائية)**: Activated via `/debate`, `/grill-me`, or Mode A escalation. Continuous multi-turn counter-questioning, relentlessly challenging assumptions, highlighting anti-patterns, and forcing binary trade-offs. Strictly terminates **only** upon explicit user trigger (`"END DEBATE"` / `"اعتماد"`), emitting a formal `architectural_debate_synthesis.md` artifact.
+4. **Local Snapshot & Outbound Push (Anti-Dual-Write)**: Cache confirmed parameters in `.tidyfactor/<skill>-brief.md`, `.tidyfactor/brief.md`, and `brand.yaml` as the sole SSOT. Replicate to Brain KIs only upon explicit user request (`--sync-brain`).
+5. **Decision Alignment Axis**: Include Axis 7 (`D` - Decision Alignment) in Pre-Emit Self-Critiques (`P5 H5 E5 S5 R5 V5 D5`) to verify that generated artifacts strictly adhere to the confirmed brief.
 
 ## The Prioritized Rule Catalog Pattern
 
@@ -68,6 +73,38 @@ For skills containing complex guideline libraries, lints, or performance/securit
 1. **Prioritized Impact Ranking**: Categorize rules strictly by quantifiable impact (`CRITICAL` $\to$ `HIGH` $\to$ `MEDIUM` $\to$ `LOW`) with standard domain prefixes (e.g., `async-`, `bundle-`, `server-`, `sec-`).
 2. **Standardized Rule Anatomy (`assets/rule-template.md`)**: Every rule must contain: (a) Rule ID, (b) Impact Tier, (c) Problem Rationale, (d) Incorrect Code Snippet (❌), (e) Correct Drop-in Code Snippet (✅), (f) Edge Cases & Constraints.
 3. **Separation from General Prose**: Keep the rule catalog strictly in operational memory (`memory/<domain>-rules.md`), loaded only by commands that generate or audit corresponding code/configurations.
+
+## The Cross-Skill Deduplication & Lean Registry Pattern
+
+When multiple skills share domain concepts (e.g., `tidyfactor-design` authoring components and `tidyfactor-styler` refactoring/polishing them):
+1. **Canonical Owner SSOT**: The foundation/authoring skill maintains the authoritative, exhaustive anatomy matrices and technical implementations.
+2. **Consuming Skill Lean Registry**: Consumer or companion skills MUST NOT mirror or copy full markdown catalogs. Instead, they vendor a condensed, tabular registry (e.g., `component-matrix-registry.md`) containing:
+   - Component ID & Category
+   - Selector / Contract Hook
+   - Key Constraints & Quick-Check Attributes
+   - Pointer to the canonical owner skill for full scaffolding/code.
+3. **Preventing Drift**: Eliminating verbatim duplication ensures that changes to foundational tokens or patterns only need to be authored once in the canonical SSOT.
+
+## The Categorized Anti-Slop Quality Gate Pattern (Matrix Lint Architecture)
+
+For generative, UI/UX, design, or frontend skills where AI agents default to generic tropes (e.g., `tidyfactor-design`, `tidyfactor-cinematic`, `tidyfactor-styler`, `tidyfactor-html`):
+
+1. **Domain-Segmented Taxonomy**: Rules must never live as an arbitrary flat list. They must be categorized into concrete technical domains (e.g. 9 distinct categories):
+   - **I. Color & Surface**: Tonal contrast, dark mode logic, scrims, forbidden default palettes (`#F4F1EA` + terracotta, near-black + acid).
+   - **II. Typography**: Scale ratios, line lengths (`≤65ch`), all-caps restraint, non-tabular monospace bounds, justified body rivers.
+   - **III. Layout & Composition**: Non-sequential badges, border-radius hierarchy, identical shadow parity, reflexive center-alignment.
+   - **IV. Decoration & Motion**: Scroll-reveal repetition, arrow CTA tics (`→`), icon soup, unmotivated motion without state trigger.
+   - **V. Interaction & State Design**: Full 8-state coverage, disabled styling, skeleton/loading jump cuts, accessible visible focus rings (`outline: none` ban).
+   - **VI. Internationalization & Accessibility**: Directional icon flipping in RTL, color redundancy, WCAG AA ratios (4.5:1 / 3:1), semantic HTML5 (`<div>` soup ban).
+   - **VII. Performance & Technical Hygiene**: Explicit image dimensions (CLS prevention), script deferral, eager below-the-fold loading ban, font fallback chains.
+   - **VIII. Content & Copy**: Active-voice verbs, informative error copy, zero placeholder copy (`Lorem Ipsum` ban), actionable empty states.
+   - **IX. AI Tell Signatures**: Template chrome combos (eyebrow + dot + dash + arrow), SaaS-card-kit sameness across unrelated briefs.
+
+2. **Binary Verifiable Negative Constraints**: Every rule must be formulated as a strict, verifiable ban with an explicit `❌` indicator, naming the defect and stating the mechanical violation.
+
+3. **Pre-Emit Self-Critique Binding**: The quality bar must integrate with the 7-Axis Quality Stamp (`/* Pre-emit critique: P5 H5 E5 S5 R5 V5 D5 */`), where Axis V (Visual Authenticity) requires 100% compliance across all numbered rules before code emission.
+
+4. **Two-Tier Bilingual Localization**: Complete semantic parity across canonical `README.md` and localized `README.ar.md`, formatted with collapsible `<details>` drawers for clean documentation UX.
 
 ## Loading order (progressive disclosure)
 
