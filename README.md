@@ -19,7 +19,7 @@
 - [The Contextual Decision Layer (CDL)](#-the-contextual-decision-layer-cdl)
 - [Tooling & Integrity Validation Suite](#-tooling--integrity-validation-suite)
 - [Cross-Agent Distribution & Synchronization](#-cross-agent-distribution--synchronization)
-- [Installation & Usage](#-installation--usage)
+- [Installation & Quick Start](#-installation--quick-start)
 - [License & Credits](#-license--credits)
 
 ---
@@ -166,15 +166,30 @@ Skills-LAB/tidyfactor-skill-architect/ (SSOT)
 
 ---
 
-## 📦 Installation & Usage
+## 🚀 Installation & Quick Start
 
-### 1. Via NPM / NPX
+Choose your preferred installation method:
+
+### Option A: Via TidyFactor CLI (Recommended)
+Install directly using the official ecosystem package runner into your active workspace:
 ```bash
-# Add directly to your active agent workspace
-npx @tidyfactor/cli-skill-architect
+npx @tidyfactor/cli add skill-architect
+```
+*Or if you have the CLI installed globally (`npm i -g @tidyfactor/cli`):*
+```bash
+tidyfactor add skill-architect
+```
 
-# Or install globally
-npm install -g @tidyfactor/skill-architect
+### Option B: Via Open Agent Skills Ecosystem (skills.sh / Vercel Labs)
+Install using the universal multi-agent standard across all supported IDEs (Cursor, Antigravity, Claude Code, Windsurf, Trae, Codex):
+```bash
+npx skills add tidyfactor/skill-architect
+```
+
+### Option C: Standalone Zero-Dependency Runner (NPM Direct)
+Run the dedicated skill installer directly with automatic cache invalidation:
+```bash
+npx @tidyfactor/skill-architect@latest
 ```
 
 ### 2. Manual Agent Registration
