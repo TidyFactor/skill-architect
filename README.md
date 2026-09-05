@@ -1,9 +1,9 @@
-# 🏛️ TidyFactor Skill Architect `v2.1.1`
+# 🏛️ TidyFactor Skill Architect `v2.6.0`
 
 > **The Canonical Governance Engine & Architecture Specification for AI Coding Agent Skills.**  
-> Enforces the **12 Structural Rules** of TidyFactor Skills across **Google Antigravity, Claude Code, Cursor, OpenAI Codex, and Windsurf**.
+> Enforces the **15 Structural Rules** of TidyFactor Skills across **Google Antigravity, Claude Code, Cursor, OpenAI Codex, and Windsurf**.
 
-[![Version](https://img.shields.io/badge/version-2.1.0-blue.svg)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-2.6.0-blue.svg)](CHANGELOG.md)
 [![License](https://img.shields.io/badge/license-Apache--2.0-green.svg)](LICENSE)
 [![Ecosystem](https://img.shields.io/badge/ecosystem-TidyFactor-orange.svg)](https://tidyfactor.com)
 [![Partner](https://img.shields.io/badge/partner-Alwkala-indigo.svg)](https://alwkala.com)
@@ -14,7 +14,7 @@
 
 - [Overview & Philosophy](#-overview--philosophy)
 - [The Architecture: Progressive Disclosure](#-the-architecture-progressive-disclosure)
-- [The 12 Structural Rules of TidyFactor Skills](#-the-12-structural-rules)
+- [The 15 Structural Rules of TidyFactor Skills](#-the-15-structural-rules)
 - [Commands & Operational Workflows](#-commands--operational-workflows)
 - [The Contextual Decision Layer (CDL)](#-the-contextual-decision-layer-cdl)
 - [Tooling & Integrity Validation Suite](#-tooling--integrity-validation-suite)
@@ -66,9 +66,9 @@ A skill must behave as a **high-speed deterministic router**, loading only the m
 
 ---
 
-## 📐 The 12 Structural Rules
+## 📐 The 15 Structural Rules
 
-Every skill created, audited, or packaged within the TidyFactor ecosystem strictly adheres to the **12 Structural Rules**:
+Every skill created, audited, or packaged within the TidyFactor ecosystem strictly adheres to the **15 Structural Rules**:
 
 | # | Rule | Core Mandate | Failure Mode Prevented |
 |---|---|---|---|
@@ -84,6 +84,9 @@ Every skill created, audited, or packaged within the TidyFactor ecosystem strict
 | **10** | **Tool Permission Declaration** | Explicit declaration of tool languages, mutation abilities, and network scope in `SKILL.md`. | Security blind spots and unprompted file overwrites. |
 | **11** | **Memory Freshness** | Required `<!-- last-verified: YYYY-MM-DD -->` marker with $\le 180$ days freshness gate. | Stale API references, deprecated flags, and broken specs. |
 | **12** | **Skill vs MCP Boundary** | Static decision logic lives in skills; dynamic APIs & databases delegate to MCP. | Skill bloat and duplicated live-data implementations. |
+| **13** | **Two-Tier Multi-Language Documentation** | Distinct separation between Canonical Global Docs (`README.md`) and 7 First-Class Market Localizations with 8-language switcher. | Linguistic slop, translation debt, and secondary market fragmentation. |
+| **14** | **Contextual Decision Layer (CDL)** | Evaluates $\text{Unknowns} = \text{Required} - (\text{Discovered} \cup \text{KIs})$, scans workspace first, offers interactive options with zero bot preamble. | Redundant user grilling, robotic greetings, and dual-write state drift. |
+| **15** | **Token Efficiency & YAML Primacy** | Prioritizes YAML (`brand.yaml`, briefs, memory) for 35–50% context savings; reserves JSON for machine wire contracts with dual-engine fallback. | Context window exhaustion, JSON syntax noise, and trailing comma errors. |
 
 ---
 
@@ -99,7 +102,7 @@ Every skill created, audited, or packaged within the TidyFactor ecosystem strict
 ### 2. `audit` — Audit & Score an Existing Skill
 - **Trigger**: `"Audit this skill"` / `"Check if this skill follows TidyFactor rules"`
 - **Loads**: `references/workflows/audit-skill.md` + `references/memory/spec.md`
-- **Output**: 12-rule compliance scorecard (`Score: X/12`), list of violations, and exact automated file-level remediations.
+- **Output**: 15-rule compliance scorecard (`Score: X/15`), list of violations, and exact automated file-level remediations.
 
 ### 3. `test` — Generate Test Scenarios
 - **Trigger**: `"Test this skill"` / `"Generate test scenarios"`

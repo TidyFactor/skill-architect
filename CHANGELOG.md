@@ -5,6 +5,37 @@ All notable changes to `tidyfactor-skill-architect` will be documented in this f
 The format is based on [Keep a CHANGELOG](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.6.0] - 2026-09-05
+
+### 🛡️ Added — The Categorized Anti-Slop Quality Gate Pattern (Matrix Lint Architecture)
+- **Standardized Anti-Slop Matrix Specification (`references/memory/spec.md`)**: Codified architectural pattern for skills generating visual, structural, or interactive UI/UX components:
+  1. **Domain-Segmented Taxonomy (9 Categories)**: Mandated categorizing all quality gates and anti-slop rules into concrete technical execution sectors (`Color & Surface`, `Typography`, `Layout & Composition`, `Decoration & Motion`, `Interaction & State`, `Internationalization & Accessibility`, `Performance & Technical Hygiene`, `Content & Copy`, `AI Tell Signatures`).
+  2. **Binary Verifiable Bans (Zero-Tolerance Tells)**: Each rule is codified with an explicit `❌` indicator, naming the anti-pattern defect and stating the mechanical violation (e.g., `#F4F1EA` terracotta tropes, line lengths `>65ch`, `<div>` soup, `outline: none` without replacement, and `Lorem Ipsum` in delivered code).
+  3. **Pre-Emit Self-Critique Integration**: Mandatory enforcement of the 7-Axis Quality Stamp (`/* Pre-emit critique: P5 H5 E5 S5 R5 V5 D5 */`), where Axis V (Visual Authenticity) requires 100% compliance across all numbered rules before code emission.
+  4. **Two-Tier Bilingual Localization**: Complete parity across canonical `README.md` and localized `README.ar.md` using collapsible `<details>` drawers for clean documentation UX.
+- **Master Workspace Rules Synchronization (`Skills-LAB/AGENTS.md` & `Skills-pro-pack/AGENTS.md`)**:
+  - Enhanced Rule 7 across community and pro workspaces to formally require the Categorized Anti-Slop Quality Gate Matrix for all generative UI and frontend skills.
+
+---
+
+## [2.5.0] - 2026-09-05
+
+### 🏛️ Added — Rule 15: Token Efficiency & Semantic Density Doctrine (YAML Primacy)
+- **Rule 15 Codification (`references/memory/spec.md`)**: Enforced mandatory Token Efficiency & Semantic Density standard across all TidyFactor skills:
+  1. **Cognitive Layer Primacy**: All brand tokens, design schemas, decision gate snapshots, and architecture matrices MUST prioritize **YAML** (`brand.yaml`, `*.brief.yaml`, `*.snapshot.yaml`) over JSON, saving 35–50% in context tokens and eliminating JSON syntax noise (`{`, `}`, `"`, `,`).
+  2. **Dual-Engine Backward Compatibility**: Tooling and workflows must support `brand.yaml` first, falling back gracefully to `brand.json` for legacy projects.
+  3. **Wire Protocol Boundary**: JSON is strictly reserved for external machine runtime standards (`package.json` for NPM, `manifest.json` for MCP stdio JSON-RPC 2.0). Never use JSON where YAML delivers identical semantics with higher token efficiency.
+- **The Cross-Skill Deduplication & Lean Registry Pattern (`references/memory/spec.md`)**:
+  - Formalized architectural boundaries for shared domain components between skills (e.g., `tidyfactor-design` foundation vs `tidyfactor-styler` consumer).
+  - Foundation skills serve as the canonical SSOT for full anatomical specifications and implementation matrices. Consuming skills maintain a condensed, tabular registry (e.g. `component-matrix-registry.md`) with pointers, avoiding multi-thousand-line duplicate Markdown files.
+- **Validation Engine Upgrade (`tools/validate_skill.py`)**:
+  - Upgraded Check `[1]` to implement dual-engine SemVer resolution (`brand.yaml` first, then `brand.json`).
+  - Added Check `[13]` for Token Efficiency & YAML Primacy (verifying cognitive YAML adoption and wire protocol JSON adherence).
+- **Audit Workflow Upgrade (`references/workflows/audit-skill.md`)**: Upgraded compliance scorecard from 14 to 15 rules (`Score: X/15`), adding Rule 15 verification.
+- **Master Rule Synchronization**: Synchronized rule count across `SKILL.md`, `tests/scenarios.md`, `README.md`, and `README.ar.md`.
+
+---
+
 ## [2.4.0] - 2026-09-02
 
 ### 🏛️ Added — Contextual Decision Layer (CDL v1.1.0) & Declarative Decision Gates Standard

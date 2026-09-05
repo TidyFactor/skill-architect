@@ -11,8 +11,8 @@
 - **Type**: happy-path
 - **Prompt**: "Audit tidyfactor-marketing skill against TidyFactor rules"
 - **Expected Command**: `references/commands/audit.md`
-- **Expected Behavior**: Loads `audit-skill.md` workflow and scores the skill against all 12 structural rules.
-- **Pass Criteria**: Compliance report scored out of 12 (X/12) with file-level specific fixes for any fails.
+- **Expected Behavior**: Loads `audit-skill.md` workflow and scores the skill against all 15 structural rules.
+- **Pass Criteria**: Compliance report scored out of 15 (X/15) with file-level specific fixes for any fails.
 
 ## Test 3: Generate test scenarios (Happy Path)
 - **Type**: happy-path
