@@ -1,0 +1,38 @@
+name: Bug Report
+description: Report a defect, rule violation, or inconsistency in TidyFactor Skill Architect
+title: "bug: "
+labels: ["bug", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for reporting an issue with TidyFactor Skill Architect.
+  - type: input
+    id: version
+    attributes:
+      label: Skill Architect Version
+      description: What version are you running? (Check package.json or brand.json)
+      placeholder: "e.g. 2.7.0"
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: Bug Description
+      description: A clear and concise description of the defect.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction Steps
+      description: Steps or test scenario to reproduce the defect.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected Behavior
+      description: What should have happened according to the 15 Structural Rules?
+    validations:
+      required: true

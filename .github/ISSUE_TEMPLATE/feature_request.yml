@@ -1,0 +1,34 @@
+name: Feature or Rule Request
+description: Propose a new governance rule, command, workflow, or capability for TidyFactor Skill Architect
+title: "feat: "
+labels: ["enhancement", "governance"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Propose a new rule or capability. Remember: growth must be trigger-justified (Rule 6).
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem Statement
+      description: What challenge or architectural anti-pattern are you trying to resolve?
+    validations:
+      required: true
+  - type: dropdown
+    id: growth_trigger
+    attributes:
+      label: Growth Rule Trigger (Rule 6)
+      description: Which verifiable lifecycle trigger justifies this addition?
+      options:
+        - "Size Trigger (>500 lines / complex cognitive load)"
+        - "Branch Trigger (2+ divergent user paths or distinct outcomes)"
+        - "Variant Trigger (distinct technical stack or domain variant)"
+    validations:
+      required: true
+  - type: textarea
+    id: proposed_solution
+    attributes:
+      label: Proposed Solution & Workflows
+      description: Describe the proposed command, workflow, or memory schema.
+    validations:
+      required: true
