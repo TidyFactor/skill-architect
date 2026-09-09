@@ -1,6 +1,6 @@
 # brand.yaml — TidyFactor Skill Architect Metadata & Identity (Rule 15 YAML Primacy)
 name: "TidyFactor Skill Architect"
-version: "2.7.0"
+version: "2.7.1"
 publisher: "TidyFactor Ecosystem"
 partner: "Alwkala Digital Agency (https://alwkala.com)"
 contact:

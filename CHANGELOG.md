@@ -5,6 +5,20 @@ All notable changes to `tidyfactor-skill-architect` will be documented in this f
 The format is based on [Keep a CHANGELOG](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.7.1] - 2026-09-09
+
+### 📚 Documentation & UX — Comprehensive README Redesign & 6-Axis Review Protocol Integration
+- **Canonical & Arabic Documentation Modernization (`README.md`, `README.ar.md`)**:
+  - Added unified 8-language switcher bar linking Canonical English, Arabic, Spanish, French, German, Portuguese, Simplified Chinese, and Persian.
+  - Implemented Above-The-Fold Quick Start block for instant 3-command onboarding via official CLI, skills.sh, or direct runner.
+  - Added comprehensive clickable Table of Contents covering all architectural and operational sections.
+  - Formatted Commands and Workflows into scannable Markdown tables, integrating the new `review` command added in v2.7.0.
+  - Added full visual and architectural specification for the **Universal 6-Axis Periodic Skill Review Protocol** and 100-point rubric thresholds.
+  - Codified the 13 automated checks from `tools/validate_skill.py` into a structured, scannable Markdown verification matrix.
+  - Wrapped `README.ar.md` in native `<div dir="rtl">` container for authentic, high-readability RTL typography.
+
+---
+
 ## [2.7.0] - 2026-09-09
 
 ### 🚀 Added — Universal 6-Axis Periodic Skill Review Protocol & Asset Hygiene Governance
