@@ -5,6 +5,37 @@ All notable changes to `tidyfactor-skill-architect` will be documented in this f
 The format is based on [Keep a CHANGELOG](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.7.0] - 2026-09-09
+
+### 🚀 Added — Universal 6-Axis Periodic Skill Review Protocol & Asset Hygiene Governance
+- **6-Axis Periodic Skill Review Protocol (`references/commands/review.md`, `references/workflows/periodic-review.md`)**:
+  - Added authoritative `review` command and standardized 6-axis evaluation protocol across all skill disciplines (Frontend, Backend, DevOps, Documentation, Marketing, Architecture).
+  - Axis 1: Commands & Context-Aware Prompts (Manifest synchronization, auto-sensing).
+  - Axis 2: Workflows & Single Outcome Checklists (Binary validation checklist).
+  - Axis 3: Operational Memory Purity & YAML Primacy (Rule 15 YAML Primacy, freshness timestamps ≤ 180 days).
+  - Axis 4: Tooling, AST Scrapers & Protocol Integration (Zero Runtime Crash, AST scraping, MCP boundary, Git sync hook).
+  - Axis 5: Governance, Markdown Linting & Tone of Voice (Atomic SemVer sync, Keep a Changelog SSOT, secret scanning, direct technical tone).
+  - Axis 6: Assets & Folder Structure Hygiene (SHA-256 duplicate elimination, orphan asset cleaner, WebP format optimization).
+- **100-Point Audit Rubric & Remediation Matrix (`references/memory/periodic-review-matrix.md`)**:
+  - Codified standardized scoring rubric with pass/warn/fail thresholds (Grade A: 90-100, Grade B: 75-89, Grade C: <75).
+  - Defined mechanical corrective formulas for duplicate assets, orphaned files, stale memory dates, and text survey anti-patterns.
+- **Specification Expansion (`references/memory/spec.md`)**:
+  - Codified the 6-Axis Periodic Review Protocol as a mandatory lifecycle engine for maintaining long-term ecosystem hygiene.
+
+---
+
+## [2.6.1] - 2026-09-08
+
+### 🧠 Enhanced — Native Interactive Wizard Protocol & Debate Mode Governance (CDL v2.0)
+- **Native Interactive Wizard Protocol (Rule 14)**:
+  - **Zero Static Text Questionnaires (`❌`)**: Strictly forbade outputting questionnaires, numbered decision lists, or trade-offs as plain markdown text in the chat window.
+  - **Mandatory Native Modal Tool Invocation (`ask_question`)**: Mandated calling the environment's native question modal tool (`ask_question` in Antigravity IDE) to render structured modal wizards with clickable choices and recommended defaults.
+  - **Deterministic Wizard Steps**: Mode A (Smart 3-Round Protocol) is rendered as progressive modal wizard steps, while Mode B (Debate Mode) poses each architectural trade-off as an individual interactive modal question.
+- **Nomenclature SSOT (Debate Mode)**:
+  - Codified `Debate Mode` as the sole official term for Mode B across all skills (activated via `/debate` or Mode A escalation), scrubbing external trademarks (e.g. `Grill-Me`) to prevent workspace conflicts.
+
+---
+
 ## [2.6.0] - 2026-09-05
 
 ### 🛡️ Added — The Categorized Anti-Slop Quality Gate Pattern (Matrix Lint Architecture)

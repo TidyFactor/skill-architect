@@ -1,9 +1,9 @@
-# 🏛️ TidyFactor Skill Architect `v2.6.0`
+# 🏛️ TidyFactor Skill Architect `v2.7.0`
 
 > **The Canonical Governance Engine & Architecture Specification for AI Coding Agent Skills.**  
-> Enforces the **15 Structural Rules** of TidyFactor Skills across **Google Antigravity, Claude Code, Cursor, OpenAI Codex, and Windsurf**.
+> Enforces the **15 Structural Rules** and the **6-Axis Periodic Review Protocol** of TidyFactor Skills across **Google Antigravity, Claude Code, Cursor, OpenAI Codex, and Windsurf**.
 
-[![Version](https://img.shields.io/badge/version-2.6.0-blue.svg)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-2.7.0-blue.svg)](CHANGELOG.md)
 [![License](https://img.shields.io/badge/license-Apache--2.0-green.svg)](LICENSE)
 [![Ecosystem](https://img.shields.io/badge/ecosystem-TidyFactor-orange.svg)](https://tidyfactor.com)
 [![Partner](https://img.shields.io/badge/partner-Alwkala-indigo.svg)](https://alwkala.com)

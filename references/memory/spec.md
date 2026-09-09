@@ -46,10 +46,10 @@ Start flat (one file per category). Split into a folder only when a category hol
     - **Mechanical Context Delta Resolution Formula**: Before prompting the user, the agent must deterministically compute:
       $$\text{Unknowns} = \text{Required Decisions} - (\text{Discovered Facts} \cup \text{Brain KIs})$$
       The agent is STRICTLY FORBIDDEN from asking the user about any fact already present on disk (`brand.json`, `.tidyfactor/*`, project configs) or cached in memory.
-    - **Interactive Disclosure & User Agency First**: All genuine $\text{Unknowns}$ resulting from the Delta equation are presented interactively to the user with structured choices (A/B/C/D) and clear recommendations. Zero arbitrary truncation—the user is given full visibility and conversational agency over their project decisions, organized logically by priority.
+    - **Interactive Wizard Protocol & User Agency First (نمط المعالج التفاعلي)**: All genuine $\text{Unknowns}$ resulting from the Delta equation MUST be presented through the environment's **native interactive question tool** (e.g. `ask_question` in Antigravity IDE) to render a structured modal wizard with selectable options and recommended defaults (`(Recommended)`). The agent is **STRICTLY FORBIDDEN** from dumping static written questionnaires, text bullet lists, or conversational survey walls into the chat (`❌ No static text surveys`).
     - **Zero Robotic Preamble**: Strictly forbid bot persona greetings, self-introductions, lecturing, or textbook dumps.
     - **Local Staleness Tracking**: For file sources marked with `track_staleness: true`, the engine compares file hash/mtime at read time against snapshot values. A changed hash re-opens the decision locally without network or MCP overhead.
-    - **Anti-Dual-Write & Fail-Open SSOT Doctrine**: The local workspace file (`.tidyfactor/*-brief.md` or `*.snapshot.json`) is the SOLE Single Source of Truth. Brain/Cloud synchronization is strictly an Outbound Push (`--sync-brain`) executed after local success. Brain MCP lookup must FAIL OPEN silently (0ms latency penalty) if unavailable.
+    - **Anti-Dual-Write & Fail-Open SSOT Doctrine**: The local workspace file (`.tidyfactor/*-brief.md`, `brand.yaml` or `*.snapshot.yaml`) is the SOLE Single Source of Truth. Brain/Cloud synchronization is strictly an Outbound Push (`--sync-brain`) executed after local success. Brain MCP lookup must FAIL OPEN silently (0ms latency penalty) if unavailable.
 15. **Token Efficiency & Semantic Density Doctrine (YAML Primacy).**
     - **Cognitive Layer Primacy**: All brand tokens, design schemas, decision gate snapshots, and architecture matrices MUST prioritize **YAML** format (`brand.yaml`, `*.brief.yaml`, `*.snapshot.yaml`, memory schemas) over JSON. This saves 35–50% in context tokens and eliminates syntax noise (`{`, `}`, `"`, `,`).
     - **Dual-Engine Backward Compatibility**: Tooling and workflows must support `brand.yaml` first, falling back to `brand.json` for legacy projects.
@@ -61,9 +61,9 @@ Start flat (one file per category). Split into a folder only when a category hol
 For skills where execution depends on architectural or strategic choices (e.g. `tidyfactor-design`, `tidyfactor-marketing`, `tidyfactor-doc`, `tidyfactor-styler`, `tidyfactor-next`), the agent acts as the **TidyFactor Dual-Mode Decision Architect (DM-DA)**:
 1. **Declarative Decision Manifest (`manifest.json["decision_gates"]`)**: Formally declare each gate's `command`, `decisions[]`, `discovery[]` sources, `persist_to` targets, and `default` values conforming to schema v1.1.0.
 2. **Context Delta Resolution Engine**: Automatically evaluate $\text{Unknowns} = \text{Required Decisions} - (\text{Discovered Facts} \cup \text{Brain KIs})$ at runtime with zero robotic preamble.
-3. **Dual Operational Modes**:
-   - **[MODE A] Smart 3-Round Protocol (🎯 الارتجال الذكي المقيد)**: Fast-track structured alignment in 3 deterministic rounds (Round 1: Root & Mission → Round 2: Boundaries & Stack → Round 3: Final Conflicts & Safe Defaults). Strictly terminates at Round 3, emits local SSOT brief, and explicitly presents an escalation gate: *"Adopt baseline immediately OR escalate to Debate Mode?"*
-   - **[MODE B] Relentless Debate & Interview (🔥 الاستجواب والمناظرة اللانهائية)**: Activated via `/debate`, `/grill-me`, or Mode A escalation. Continuous multi-turn counter-questioning, relentlessly challenging assumptions, highlighting anti-patterns, and forcing binary trade-offs. Strictly terminates **only** upon explicit user trigger (`"END DEBATE"` / `"اعتماد"`), emitting a formal `architectural_debate_synthesis.md` artifact.
+3. **Dual Operational Modes (Executed Exclusively via Native Interactive Modals)**:
+   - **[MODE A] Smart 3-Round Protocol (🎯 الارتجال الذكي المقيد)**: Fast-track structured alignment in 3 deterministic rounds (Round 1: Root & Mission → Round 2: Boundaries & Stack → Round 3: Final Conflicts & Safe Defaults). Each round MUST be presented as an interactive modal wizard using the native question tool (`ask_question`). Strictly terminates at Round 3, emits local SSOT brief, and explicitly presents an escalation gate: *"Adopt baseline immediately OR escalate to Debate Mode?"*
+   - **[MODE B] Relentless Debate & Interview (🔥 الاستجواب والمناظرة اللانهائية — Debate Mode)**: Activated via `/debate`, explicit user trigger ("مناظرة" / "استجوبني"), or Mode A escalation. Continuous multi-turn counter-questioning, relentlessly challenging assumptions, highlighting anti-patterns, and forcing binary trade-offs. Each challenge/trade-off MUST be posed as a native interactive question modal (`ask_question`) one step at a time. Strictly terminates **only** upon explicit user trigger (`"END DEBATE"` / `"اعتماد"`), emitting a formal `architectural_debate_synthesis.md` artifact.
 4. **Local Snapshot & Outbound Push (Anti-Dual-Write)**: Cache confirmed parameters in `.tidyfactor/<skill>-brief.md`, `.tidyfactor/brief.md`, and `brand.yaml` as the sole SSOT. Replicate to Brain KIs only upon explicit user request (`--sync-brain`).
 5. **Decision Alignment Axis**: Include Axis 7 (`D` - Decision Alignment) in Pre-Emit Self-Critiques (`P5 H5 E5 S5 R5 V5 D5`) to verify that generated artifacts strictly adhere to the confirmed brief.
 
@@ -119,3 +119,15 @@ When any structural rule in this file is added, modified, or removed:
 1. Update the rule count in all referencing files: `SKILL.md` (both SSOT and `.agents/` wrapper), `references/workflows/audit-skill.md`, `README.md`, and `README.ar.md`.
 2. Re-run `node tools/build-skill.js` to rebuild `dist/` and sync across all 5 target locations.
 3. Verify zero stale references: search for the old count across all `.md` files.
+
+## 🏛️ The 6-Axis Periodic Skill Review Protocol (نمط المراجعة الدوري للمهارات)
+
+To ensure long-term architectural integrity, zero undocumented drift, and elimination of asset bloat across all skills in the ecosystem, every skill must undergo periodic inspection against the **6-Axis Review Matrix** (`references/workflows/periodic-review.md` & `references/memory/periodic-review-matrix.md`):
+
+1. **Axis 1: Commands & Context-Aware Prompts**: 100% manifest synchronization, auto-sensing project context, and router discipline.
+2. **Axis 2: Workflows & Single Outcome Checklists**: One deliverable per workflow with an authoritative binary `## Validation checklist`.
+3. **Axis 3: Operational Memory Purity & YAML Primacy**: Pure factual density, Rule 15 YAML Primacy (`brand.yaml`), and freshness timestamps (`<!-- last-verified: YYYY-MM-DD -->` ≤ 180 days).
+4. **Axis 4: Tooling, AST Scrapers & Protocol Integration**: Deterministic native scripts (Zero Runtime Crash), AST docblock scraping, and fail-open MCP boundaries.
+5. **Axis 5: Governance, Markdown Linting & Tone of Voice**: Atomic SemVer synchronization, Keep a Changelog SSOT, secret scanning, and direct, objective tone of voice.
+6. **Axis 6: Assets & Folder Structure Hygiene**: SHA-256 duplicate elimination, unreferenced orphan asset purging, and WebP format compression (up to 80% footprint reduction).
+

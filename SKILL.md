@@ -1,6 +1,6 @@
 ---
 name: tidyfactor-skill-architect
-description: "Master governance layer for AI Coding Agent Skills. Use when building a new skill, auditing for structural compliance, generating test scenarios, evaluating file growth, or when the user asks for a 'TidyFactor skill' or 'مهارة بمنهجية TidyFactor'. Anti-triggers: Do NOT use for general prompt writing or non-skill content tasks."
+description: "Master governance layer for AI Coding Agent Skills. Use when building a new skill, conducting 6-axis periodic reviews, auditing structural compliance, generating test scenarios, evaluating file growth, or when the user asks for a 'TidyFactor skill' or 'مهارة بمنهجية TidyFactor'. Anti-triggers: Do NOT use for general prompt writing or non-skill content tasks."
 ---
 
 # TidyFactor Skill Architect
@@ -13,6 +13,7 @@ A command dispatcher. This file does not do the work itself — it routes to the
 |---|---|---|
 | "Build me a skill for X" / "turn this into a skill" | `references/commands/init.md` | `workflows/create-skill.md` + `memory/spec.md` + `memory/growth-rule.md` + `assets/skill-md-skeleton.md` |
 | "Check if this skill follows TidyFactor" / "audit this skill" | `references/commands/audit.md` | `workflows/audit-skill.md` + `memory/spec.md` |
+| "Periodic 6-axis skill review / audit asset bloat & gaps" / "review" | `references/commands/review.md` | `workflows/periodic-review.md` + `memory/periodic-review-matrix.md` + `memory/spec.md` |
 | "Test this skill" / "generate test scenarios" | `references/commands/test.md` | `workflows/test-skill.md` + `memory/spec.md` |
 | "Should I add a new file to this skill?" | `references/commands/grow.md` | `memory/growth-rule.md` |
 
